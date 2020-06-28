@@ -46,19 +46,17 @@ ruct)
 
 int parse(const char *str, va_list ap, int i, t_printf *printf_struct)
 {
-	char	*res;
-
-	res = NULL;
 	if (printf_struct->conversion == 's')
-		conv_string(ap, printf_struct);
-	ft_putstr(res);
-	return (i);
+		printf_struct->res = conv_string(ap, printf_struct);
+	//else if ()
+	ft_putstr(printf_struct->res);
+	return (i + 2);
 }
 
-size_t ft_printf(const char *input_str, ...)
+int ft_printf(const char *input_str, ...)
 {
 	va_list		ap;
-	size_t		res;
+	int		res;
 	t_printf	printf_struct;
 	char	*identified_string;
 	char	*text;
@@ -73,9 +71,9 @@ size_t ft_printf(const char *input_str, ...)
 	//print_string(text);
 	while (input_str[i])
 	{
-		if (input_str[i] != '%')
-			res += write(1, input_str[i++], 1);
-		else if (input_str[i])
+		while (input_str[i] != '%')
+			res += ft_putchar(input_str[i++]);
+		if (input_str[i])
 		{
 			printf_struct.conversion = input_str[i + 1];
 			i = parse(input_str, ap, i, &printf_struct);
@@ -93,6 +91,7 @@ size_t ft_printf(const char *input_str, ...)
 void init(t_printf *printf_struct)
 {
 	printf_struct->conversion = 0;
+	printf_struct->res = NULL;
 }
 
 int main(void)
