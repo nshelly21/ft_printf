@@ -15,7 +15,7 @@
 typedef struct	s_printf
 {
 	char 		conversion;
-	char 		res;
+	char 		*res;
 }				t_printf;
 
 void	init(t_printf *printf_struct);
