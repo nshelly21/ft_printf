@@ -10,7 +10,6 @@
 # include <unistd.h>// for write function
 # include <stdlib.h> //for malloc, free and exit functions
 # include <stdarg.h>
-# include <string.h>//prohibited but im not going to rewrite stycpy and strchr
 
 typedef struct	s_printf
 {

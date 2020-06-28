@@ -1,4 +1,4 @@
-#include "includes/ft_printf.h"
+#include "ft_printf.h"
 
 /* print all non-negative args one at a time;
    all args are assumed to be of int type */
@@ -31,7 +31,8 @@ char* reader_identifier(const char *string)
 
 // handle error!!!
 
-char *conv_string(va_list ap, t_printf *printf_struct)
+char *conv_string(va_list ap, t_printf *printf_stls
+ruct)
 {
 	char *identified_string;
 	char *res;
