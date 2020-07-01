@@ -1,38 +1,6 @@
 #include "ft_printf.h"
 
-/* print all non-negative args one at a time;
-   all args are assumed to be of int type */
-
-/*void print_string(char *string)
-{
-	int i;
-
-	i = 0;
-	write(1, &string[i],ft_strlen(string));
-}
-
-char* reader_identifier(const char *string)
-{
-	char *tmp;
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	tmp = (char*)malloc(sizeof(char)*ft_strlen(string));
-	while(string[i] != '%')
-	{
-		tmp[i] = string[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
-}*/
-
-// handle error!!!
-
-char *conv_string(va_list ap, t_printf *printf_stls
-ruct)
+char *conv_string(va_list ap, t_printf *printf_struct)
 {
 	char *identified_string;
 	char *res;
@@ -66,9 +34,7 @@ int ft_printf(const char *input_str, ...)
 	res = 0;
 	init(&printf_struct);
 	va_start(ap, input_str);
-	//identified_string = va_arg(ap, typeof(identified_string));
-	//text = reader_identifier(input_str);
-	//print_string(text);
+
 	while (input_str[i])
 	{
 		while (input_str[i] != '%')
@@ -78,10 +44,6 @@ int ft_printf(const char *input_str, ...)
 			printf_struct.conversion = input_str[i + 1];
 			i = parse(input_str, ap, i, &printf_struct);
 		}
-		/*if (input_str[i] == '%' && input_str[i + 1] == 's')//check if the parameter is string, so print as string
-		{
-			print_string(identified_string);
-		}*/
 	}
 	va_end(ap);
 	write(1, "\n", 1);
