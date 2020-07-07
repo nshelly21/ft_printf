@@ -60,6 +60,10 @@ add_executable(ft_printf
         libft/ft_strsub.c
         libft/ft_tolower.c
         libft/ft_toupper.c
+        libft/ft_lstnew.c
+        libft/ft_lstadd.c
+        libft/ft_lstiter.c
+
 
         srcs/ft_printf.c
         includes/ft_printf.h)

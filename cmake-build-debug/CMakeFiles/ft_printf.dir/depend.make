@@ -23,6 +23,15 @@ CMakeFiles/ft_printf.dir/libft/ft_isprint.c.o: ../libft/ft_isprint.c
 CMakeFiles/ft_printf.dir/libft/ft_itoa.c.o: ../libft/ft_itoa.c
 CMakeFiles/ft_printf.dir/libft/ft_itoa.c.o: ../libft/libft.h
 
+CMakeFiles/ft_printf.dir/libft/ft_lstadd.c.o: ../libft/ft_lstadd.c
+CMakeFiles/ft_printf.dir/libft/ft_lstadd.c.o: ../libft/libft.h
+
+CMakeFiles/ft_printf.dir/libft/ft_lstiter.c.o: ../libft/ft_lstiter.c
+CMakeFiles/ft_printf.dir/libft/ft_lstiter.c.o: ../libft/libft.h
+
+CMakeFiles/ft_printf.dir/libft/ft_lstnew.c.o: ../libft/ft_lstnew.c
+CMakeFiles/ft_printf.dir/libft/ft_lstnew.c.o: ../libft/libft.h
+
 CMakeFiles/ft_printf.dir/libft/ft_memalloc.c.o: ../libft/ft_memalloc.c
 CMakeFiles/ft_printf.dir/libft/ft_memalloc.c.o: ../libft/libft.h
 

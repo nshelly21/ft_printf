@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = ft_printf
 
-HEADERS = -I includes/ -I libft/
+HEADERS = -I . -I libft/
 
 LIBS = -L ./libft/ -lft
 
