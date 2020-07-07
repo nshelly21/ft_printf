@@ -122,9 +122,17 @@ int ft_printf(const char *input_string, ...)
 	{
 		if (flags[i] == 'd')
 			word = ft_itoa(va_arg(ap, int));
-		if (flags[i] == 's')
+		else if  (flags[i] == 's')
 			word =  va_arg(ap, char*);
-		if (i == 0)
+		else if (flags[i] == 'i')
+			word = "не обработанно";
+		else if  (flags[i] == 'u')
+			word = "не обработанно";
+		else if  (flags[i] == 'x')
+			word = "не обработанно";
+		else if  (flags[i] == 'p')
+			word =  "не обработанно";
+		if  (i == 0)
 			words_list = ft_lstnew(word, ft_strlen(word));
 		if (i!= 0)
 			ft_lstadd(&words_list, ft_lstnew(word, ft_strlen(word)));
