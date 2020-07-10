@@ -130,6 +130,9 @@ CMakeFiles/ft_printf.dir/libft/ft_strnstr.c.o: ../libft/libft.h
 CMakeFiles/ft_printf.dir/libft/ft_strrchr.c.o: ../libft/ft_strrchr.c
 CMakeFiles/ft_printf.dir/libft/ft_strrchr.c.o: ../libft/libft.h
 
+CMakeFiles/ft_printf.dir/libft/ft_strrev.c.o: ../libft/ft_strrev.c
+CMakeFiles/ft_printf.dir/libft/ft_strrev.c.o: ../libft/libft.h
+
 CMakeFiles/ft_printf.dir/libft/ft_strsplit.c.o: ../libft/ft_strsplit.c
 CMakeFiles/ft_printf.dir/libft/ft_strsplit.c.o: ../libft/libft.h
 
@@ -141,6 +144,10 @@ CMakeFiles/ft_printf.dir/libft/ft_strsub.c.o: ../libft/libft.h
 CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o: ../libft/ft_tolower.c
 
 CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o: ../libft/ft_toupper.c
+
+CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o: ../includes/ft_printf.h
+CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o: ../libft/libft.h
+CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o: ../srcs/ft_itoa.c
 
 CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o: ../includes/ft_printf.h
 CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o: ../libft/libft.h
