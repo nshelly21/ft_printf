@@ -14,7 +14,7 @@ char    *ft_strrev(char *str)
     len = ft_strlen(str);
     while (len - 1 > i)
     {
-        buf = str[len];
+        buf = str[len -1];
         str[len - 1] = str[i];
         str[i] = buf;
         len--;

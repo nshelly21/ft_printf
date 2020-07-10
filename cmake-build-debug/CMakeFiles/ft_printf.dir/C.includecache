@@ -32,6 +32,22 @@ stdlib.h
 string.h
 -
 
+/Users/dgruyere/projects/ft_printf/libft/ft_strrev.c
+libft.h
+/Users/dgruyere/projects/ft_printf/libft/libft.h
+
+/Users/dgruyere/projects/ft_printf/libft/libft.h
+sys/types.h
+-
+sys/stat.h
+-
+unistd.h
+-
+stdlib.h
+-
+string.h
+-
+
 /Users/dgruyere/projects/ft_printf/srcs/ft_printf.c
 includes/ft_printf.h
 /Users/dgruyere/projects/ft_printf/srcs/includes/ft_printf.h

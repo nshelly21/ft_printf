@@ -189,7 +189,7 @@ int main(void)
 	ft_printf("hello my another nickname is %s", nickname2);
 	ft_printf("hello my another nickname is %s", nickname1, nickname2);
 	ft_printf("hello! The bomb is ticking down, %s: %d, %d, %d", nickname2, 3, 2, 1);
-	ft_printf("%d in octal form is %o, in hexadecimal %x", 9, 100, 100);
+	ft_printf("%d in octal form is %o, in hexadecimal %x", 100, 100, 100);
 
 	return 0;
 }
