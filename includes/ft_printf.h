@@ -17,7 +17,6 @@ typedef struct	s_printf
 	char 		conversion;
 	char 		*res;
 	int         isneg;
-	int         ispos;
 	int			iszero;
 	int 		is_l;
 	int 		is_ll;

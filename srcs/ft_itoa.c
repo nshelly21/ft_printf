@@ -27,7 +27,6 @@ char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
     //TODO handle if num == 0;
     if (value < 0)
     {
-        printf_struct->ispos = 0;
         printf_struct->isneg = 1;
 		value = value * (-1);
     }
@@ -47,7 +46,7 @@ char	*ft_itoa_printf_u2(unsigned long long value, int base, char *str)
 	while (value != 0)
 	{
 		ostatok = value % base;
-		str[i++] = (ostatok > 9) ? (ostatok - 10) + 'a' : ostatok + '0';
+		str[i++] = (ostatok > 9) ? ostatok - 10 + 'a' : ostatok + '0';
 		value /= base;
 	}
 	str[i] = '\0';
@@ -61,6 +60,6 @@ char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_str
 	//TODO handle if num == 0;
 	if ((res = (char *)malloc(sizeof(char) * 65)) == NULL)
 		return (ft_strdup("malloc error")); //TODO make proper exit function
-	res = ft_itoa_printf2(value, base, res);
+	res = ft_itoa_printf_u2(value, base, res);
 	return (res);
 }
