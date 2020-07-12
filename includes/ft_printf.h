@@ -10,7 +10,6 @@
 # include <unistd.h>// for write function
 # include <stdlib.h> //for malloc, free and exit functions
 # include <stdarg.h>
-# include <string.h>//prohibited but im not going to rewrite stycpy and strchr
 
 typedef struct	s_printf
 {
@@ -35,8 +34,8 @@ typedef struct s_int
 
 void	init(t_printf *printf_struct, t_int *int_struct);
 void    init_t_int(t_int *int_struct);
-int 	parse(const char *str, va_list ap, int i, t_printf *printf_struct);
+int 	parse(va_list ap, int i, t_printf *printf_struct);
 char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct);
-char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_struct);
+char	*ft_itoa_printf_u1(unsigned long long value, int base);//, t_printf *printf_struct);
 
 #endif //FT_PRINTF_FT_PRINTF_H

@@ -7,7 +7,7 @@ include_directories(.)
 include_directories(libft)
 include_directories(libft/includes)
 
-add_executable(ft_printf
+add_executable(
         libft/includes/libft.h
         libft/ft_atoi.c
         libft/ft_bzero.c
@@ -60,7 +60,14 @@ add_executable(ft_printf
         libft/ft_strsub.c
         libft/ft_tolower.c
         libft/ft_toupper.c
+<<<<<<< HEAD
         libft/ft_strrev.c
+=======
+        libft/ft_lstnew.c
+        libft/ft_lstadd.c
+        libft/ft_lstiter.c
+
+>>>>>>> master
 
         srcs/ft_printf.c
         includes/ft_printf.h srcs/ft_itoa.c)

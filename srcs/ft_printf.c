@@ -6,17 +6,14 @@
 /*void print_string(char *string)
 {
 	int i;
-
 	i = 0;
 	write(1, &string[i],ft_strlen(string));
 }
-
 char* reader_identifier(const char *string)
 {
 	char *tmp;
 	int i;
 	int j;
-
 	i = 0;
 	j = 0;
 	tmp = (char*)malloc(sizeof(char)*ft_strlen(string));
@@ -174,11 +171,9 @@ char	*conv_int25(va_list ap, t_printf *printf_struct)
 
 char    *conv_int(va_list ap, t_printf *printf_struct)
 {
-    char    *res;
-    t_int   int_struct;
+	t_int   int_struct;
 
 	init_t_int(&int_struct);
-	res = NULL;
 	if (printf_struct->is_l == 0 && printf_struct->is_ll && printf_struct->is_h && printf_struct->is_hh)
 	{
 		int_struct.intnb = va_arg(ap, int);
@@ -194,10 +189,10 @@ char    *conv_int(va_list ap, t_printf *printf_struct)
 		else
 			return(ft_itoa_printf1(int_struct.longlongnb, 10, printf_struct));
 	}
-    return(conv_int25(ap, printf_struct));
+	return(conv_int25(ap, printf_struct));
 }
 //TODO
-char    *conv_string(va_list ap, t_printf *printf_struct)
+char    *conv_string(va_list ap)//, t_printf *printf_struct)
 {
 	char *identified_string;
 	char *res;
@@ -209,26 +204,27 @@ char    *conv_string(va_list ap, t_printf *printf_struct)
 	return (res);
 }
 
-int     parse(const char *str, va_list ap, int i, t_printf *printf_struct)
+int     parse(va_list ap, int i, t_printf *printf_struct)
 {
+
 	if (printf_struct->conversion == 's')
-		printf_struct->res = conv_string(ap, printf_struct);
-	/*TODO else if (printf_struct->conversion == 'c')
-		printf_struct->res = conv_char(ap, printf_struct);*/
-	else if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
-        printf_struct->res = conv_int(ap, printf_struct);
-    else if (printf_struct->conversion == 'o')
-        printf_struct->res = conv_oct(ap, printf_struct);
-    else if (printf_struct->conversion == 'u')
-        printf_struct->res = conv_unsint(ap, printf_struct);
-    else if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
-        printf_struct->res = conv_hex(ap, printf_struct);
-    else if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
-        i = i + 0;
-        //TODO printf_struct->res = conv_?(ap, printf_struct);
-    else if (printf_struct->conversion == '%')
-        i = i + 0;
-        //TODO printf_struct->res = conv_?(ap, printf_struct);
+		printf_struct->res = conv_string(ap);//, printf_struct);
+		/*TODO else if (printf_struct->conversion == 'c')
+			printf_struct->res = conv_char(ap, printf_struct);*/
+	if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
+		printf_struct->res = conv_int(ap, printf_struct);
+	else if (printf_struct->conversion == 'o')
+		printf_struct->res = conv_oct(ap, printf_struct);
+	else if (printf_struct->conversion == 'u')
+		printf_struct->res = conv_unsint(ap, printf_struct);
+	else if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
+		printf_struct->res = conv_hex(ap, printf_struct);
+	else if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
+		i = i + 0;
+		//TODO printf_struct->res = conv_?(ap, printf_struct);
+	else if (printf_struct->conversion == '%')
+		i = i + 0;
+	//TODO printf_struct->res = conv_?(ap, printf_struct);
 	ft_putstr(printf_struct->res);
 	return (i + 2);
 }
@@ -239,8 +235,6 @@ int ft_printf(const char *input_str, ...)
 	int		res;
 	t_printf	printf_struct;
 	t_int       int_struct;
-	char	*identified_string;
-	char	*text;
 	int		i;
 
 	i = 0;
@@ -257,7 +251,7 @@ int ft_printf(const char *input_str, ...)
 		if (input_str[i])
 		{
 			printf_struct.conversion = input_str[i + 1];
-			i = parse(input_str, ap, i, &printf_struct);
+			i = parse(ap, i, &printf_struct);
 		}
 		/*if (input_str[i] == '%' && input_str[i + 1] == 's')//check if the parameter is string, so print as string
 		{
@@ -271,10 +265,10 @@ int ft_printf(const char *input_str, ...)
 
 void    init_t_printf(t_printf *printf_struct)
 {
-    printf_struct->conversion = 0;
-    printf_struct->res = NULL;
-    printf_struct->isneg = 0;
-    printf_struct->iszero = 0;
+	printf_struct->conversion = 0;
+	printf_struct->res = NULL;
+	printf_struct->isneg = 0;
+	printf_struct->iszero = 0;
 	printf_struct->is_l = 0;
 	printf_struct->is_ll = 0;
 	printf_struct->is_h = 0;
@@ -284,16 +278,16 @@ void    init_t_printf(t_printf *printf_struct)
 
 void    init_t_int(t_int *int_struct)
 {
-    int_struct->longlongnb = 0;
-    int_struct->longnb = 0;
-    int_struct->intnb = 0;
-    int_struct->shortnb = 0;
+	int_struct->longlongnb = 0;
+	int_struct->longnb = 0;
+	int_struct->intnb = 0;
+	int_struct->shortnb = 0;
 }
 
 void init(t_printf *printf_struct, t_int *int_struct)
 {
-    init_t_printf(printf_struct);
-    init_t_int(int_struct);
+	init_t_printf(printf_struct);
+	init_t_int(int_struct);
 }
 
 int main(void)

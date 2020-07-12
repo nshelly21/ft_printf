@@ -14,13 +14,9 @@
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t			i;
-	unsigned char	*p;
 	unsigned char	*p1;
 	unsigned char	*pmem;
 
-	i = 0;
-	p = (unsigned char*)dst;
 	p1 = (unsigned char*)src;
 	pmem = (unsigned char*)ft_memchr(src, c, n);
 	if (pmem)
