@@ -1,6 +1,7 @@
 #include "includes/ft_printf.h"
 
-/* print all non-negative args one at a time;
+/* this is a comment test for git, nshelly
+ * print all non-negative args one at a time;
    all args are assumed to be of int type */
 
 /*void print_string(char *string)
