@@ -39,19 +39,33 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
+<<<<<<< HEAD
+CMAKE_COMMAND = /Users/dgruyere/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake
+
+# The command to remove a file.
+RM = /Users/dgruyere/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
+=======
 CMAKE_COMMAND = /snap/clion/114/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
 RM = /snap/clion/114/bin/cmake/linux/bin/cmake -E remove -f
+>>>>>>> master
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /Users/dgruyere/projects/ft_printf
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /Users/dgruyere/projects/ft_printf/cmake-build-debug
+=======
 CMAKE_SOURCE_DIR = /home/danny/ft_printf
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/danny/ft_printf/cmake-build-debug
+>>>>>>> master
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +73,11 @@ CMAKE_BINARY_DIR = /home/danny/ft_printf/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+<<<<<<< HEAD
+	/Users/dgruyere/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+=======
 	/snap/clion/114/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+>>>>>>> master
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +88,11 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+<<<<<<< HEAD
+	/Users/dgruyere/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+=======
 	/snap/clion/114/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+>>>>>>> master
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +102,15 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
+<<<<<<< HEAD
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles /Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles 0
+=======
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/ft_printf/cmake-build-debug/CMakeFiles /home/danny/ft_printf/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/ft_printf/cmake-build-debug/CMakeFiles 0
+>>>>>>> master
 .PHONY : all
 
 # The main clean target
@@ -1446,6 +1474,33 @@ libft/ft_strrchr.c.s:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libft/ft_strrchr.c.s
 .PHONY : libft/ft_strrchr.c.s
 
+libft/ft_strrev.o: libft/ft_strrev.c.o
+
+.PHONY : libft/ft_strrev.o
+
+# target to build an object file
+libft/ft_strrev.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libft/ft_strrev.c.o
+.PHONY : libft/ft_strrev.c.o
+
+libft/ft_strrev.i: libft/ft_strrev.c.i
+
+.PHONY : libft/ft_strrev.i
+
+# target to preprocess a source file
+libft/ft_strrev.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libft/ft_strrev.c.i
+.PHONY : libft/ft_strrev.c.i
+
+libft/ft_strrev.s: libft/ft_strrev.c.s
+
+.PHONY : libft/ft_strrev.s
+
+# target to generate assembly for a file
+libft/ft_strrev.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libft/ft_strrev.c.s
+.PHONY : libft/ft_strrev.c.s
+
 libft/ft_strsplit.o: libft/ft_strsplit.c.o
 
 .PHONY : libft/ft_strsplit.o
@@ -1580,6 +1635,33 @@ libft/ft_toupper.s: libft/ft_toupper.c.s
 libft/ft_toupper.c.s:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libft/ft_toupper.c.s
 .PHONY : libft/ft_toupper.c.s
+
+srcs/ft_itoa.o: srcs/ft_itoa.c.o
+
+.PHONY : srcs/ft_itoa.o
+
+# target to build an object file
+srcs/ft_itoa.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o
+.PHONY : srcs/ft_itoa.c.o
+
+srcs/ft_itoa.i: srcs/ft_itoa.c.i
+
+.PHONY : srcs/ft_itoa.i
+
+# target to preprocess a source file
+srcs/ft_itoa.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.i
+.PHONY : srcs/ft_itoa.c.i
+
+srcs/ft_itoa.s: srcs/ft_itoa.c.s
+
+.PHONY : srcs/ft_itoa.s
+
+# target to generate assembly for a file
+srcs/ft_itoa.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.s
+.PHONY : srcs/ft_itoa.c.s
 
 srcs/ft_printf.o: srcs/ft_printf.c.o
 
@@ -1764,6 +1846,9 @@ help:
 	@echo "... libft/ft_strrchr.o"
 	@echo "... libft/ft_strrchr.i"
 	@echo "... libft/ft_strrchr.s"
+	@echo "... libft/ft_strrev.o"
+	@echo "... libft/ft_strrev.i"
+	@echo "... libft/ft_strrev.s"
 	@echo "... libft/ft_strsplit.o"
 	@echo "... libft/ft_strsplit.i"
 	@echo "... libft/ft_strsplit.s"
@@ -1779,6 +1864,9 @@ help:
 	@echo "... libft/ft_toupper.o"
 	@echo "... libft/ft_toupper.i"
 	@echo "... libft/ft_toupper.s"
+	@echo "... srcs/ft_itoa.o"
+	@echo "... srcs/ft_itoa.i"
+	@echo "... srcs/ft_itoa.s"
 	@echo "... srcs/ft_printf.o"
 	@echo "... srcs/ft_printf.i"
 	@echo "... srcs/ft_printf.s"

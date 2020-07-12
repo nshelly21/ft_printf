@@ -22,7 +22,7 @@ LIBS = -L ./libft/ -lft
 
 OBJS = $(SRCS:.c=.o)
 
-SRCS = srcs/ft_printf.c
+SRCS = srcs/ft_printf.c srcs/ft_itoa.c
 
 all: $(NAME)
 

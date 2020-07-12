@@ -91,5 +91,6 @@ int					ft_lstsize(t_list **head);
 int					ft_max(int d1, int d2);
 int					ft_min(int d1, int d2);
 void				ft_swap(int *a, int *b);
+char                *ft_strrev(char *str);
 
 #endif
