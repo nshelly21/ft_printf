@@ -53,7 +53,7 @@ char	*ft_itoa_printf_u2(unsigned long long value, int base, char *str)
 	return (ft_strrev(str));
 }
 
-char	*ft_itoa_printf_u1(unsigned long long value, int base)//, t_printf *printf_struct)
+char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_struct)
 {
 	char				*res;
 

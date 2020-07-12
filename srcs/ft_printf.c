@@ -1,7 +1,6 @@
 #include "includes/ft_printf.h"
 
-/* this is a comment test for git, nshelly
- * print all non-negative args one at a time;
+/* print all non-negative args one at a time;
    all args are assumed to be of int type */
 
 /*void print_string(char *string)
@@ -242,7 +241,6 @@ int ft_printf(const char *input_str, ...)
 	res = 0;
 	init(&printf_struct, &int_struct);
 	va_start(ap, input_str);
-	/fdafafafa
 	//identified_string = va_arg(ap, typeof(identified_string));
 	//text = reader_identifier(input_str);
 	//print_string(text);

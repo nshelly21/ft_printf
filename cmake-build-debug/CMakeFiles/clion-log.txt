@@ -1,4 +1,4 @@
-/snap/clion/114/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/danny/ft_printf_union
+/snap/clion/114/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/danny/ft_printf
 CMake Error at CMakeLists.txt:10 (add_executable):
   The target name "libft/includes/libft.h" is reserved or not valid for
   certain CMake features, such as generator expressions, and may result in
@@ -6,5 +6,5 @@ CMake Error at CMakeLists.txt:10 (add_executable):
 
 
 -- Configuring incomplete, errors occurred!
-See also "/home/danny/ft_printf_union/cmake-build-debug/CMakeFiles/CMakeOutput.log".
-Cannot read project file /home/danny/ft_printf_union/cmake-build-debug/ft_printf.cbp
+See also "/home/danny/ft_printf/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+Cannot read project file /home/danny/ft_printf/cmake-build-debug/ft_printf.cbp
