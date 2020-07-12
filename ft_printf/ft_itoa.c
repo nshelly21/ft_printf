@@ -27,7 +27,7 @@ char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
     //TODO handle if num == 0;
     if (value < 0)
     {
-        printf_struct->isneg = 1;
+        printf_struct->is_neg = 1;
 		value = value * (-1);
     }
     if ((res = (char *)malloc(sizeof(char) * 65)) == NULL)
@@ -53,7 +53,7 @@ char	*ft_itoa_printf_u2(unsigned long long value, int base, char *str)
 	return (ft_strrev(str));
 }
 
-char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_struct)
+char	*ft_itoa_printf_u1(unsigned long long value, int base)
 {
 	char				*res;
 

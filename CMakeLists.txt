@@ -62,5 +62,5 @@ add_executable(ft_printf
         libft/ft_toupper.c
         libft/ft_strrev.c
 
-        srcs/ft_printf.c
-        includes/ft_printf.h srcs/ft_itoa.c)
+        ft_printf/ft_printf.c
+        includes/ft_printf.h ft_printf/ft_itoa.c)
