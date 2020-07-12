@@ -241,6 +241,7 @@ int ft_printf(const char *input_str, ...)
 	res = 0;
 	init(&printf_struct, &int_struct);
 	va_start(ap, input_str);
+	/fdafafafa
 	//identified_string = va_arg(ap, typeof(identified_string));
 	//text = reader_identifier(input_str);
 	//print_string(text);
