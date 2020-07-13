@@ -733,31 +733,44 @@ CMakeFiles/ft_printf.dir/libft/ft_strrev.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft_printf.dir/libft/ft_strrev.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dgruyere/projects/ft_printf/libft/ft_strrev.c -o CMakeFiles/ft_printf.dir/libft/ft_strrev.c.s
 
-CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o: CMakeFiles/ft_printf.dir/flags.make
-CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o: ../srcs/ft_printf.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o   -c /Users/dgruyere/projects/ft_printf/srcs/ft_printf.c
+CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o: CMakeFiles/ft_printf.dir/flags.make
+CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o: ../ft_printf/ft_printf.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o   -c /Users/dgruyere/projects/ft_printf/ft_printf/ft_printf.c
 
-CMakeFiles/ft_printf.dir/srcs/ft_printf.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft_printf.dir/srcs/ft_printf.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dgruyere/projects/ft_printf/srcs/ft_printf.c > CMakeFiles/ft_printf.dir/srcs/ft_printf.c.i
+CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dgruyere/projects/ft_printf/ft_printf/ft_printf.c > CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.i
 
-CMakeFiles/ft_printf.dir/srcs/ft_printf.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft_printf.dir/srcs/ft_printf.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dgruyere/projects/ft_printf/srcs/ft_printf.c -o CMakeFiles/ft_printf.dir/srcs/ft_printf.c.s
+CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dgruyere/projects/ft_printf/ft_printf/ft_printf.c -o CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.s
 
-CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o: CMakeFiles/ft_printf.dir/flags.make
-CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o: ../srcs/ft_itoa.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o   -c /Users/dgruyere/projects/ft_printf/srcs/ft_itoa.c
+CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o: CMakeFiles/ft_printf.dir/flags.make
+CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o: ../ft_printf/ft_itoa.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o   -c /Users/dgruyere/projects/ft_printf/ft_printf/ft_itoa.c
 
-CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dgruyere/projects/ft_printf/srcs/ft_itoa.c > CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.i
+CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dgruyere/projects/ft_printf/ft_printf/ft_itoa.c > CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.i
 
-CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dgruyere/projects/ft_printf/srcs/ft_itoa.c -o CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.s
+CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dgruyere/projects/ft_printf/ft_printf/ft_itoa.c -o CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.s
+
+CMakeFiles/ft_printf.dir/main.c.o: CMakeFiles/ft_printf.dir/flags.make
+CMakeFiles/ft_printf.dir/main.c.o: ../main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object CMakeFiles/ft_printf.dir/main.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft_printf.dir/main.c.o   -c /Users/dgruyere/projects/ft_printf/main.c
+
+CMakeFiles/ft_printf.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft_printf.dir/main.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dgruyere/projects/ft_printf/main.c > CMakeFiles/ft_printf.dir/main.c.i
+
+CMakeFiles/ft_printf.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft_printf.dir/main.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dgruyere/projects/ft_printf/main.c -o CMakeFiles/ft_printf.dir/main.c.s
 
 # Object files for target ft_printf
 ft_printf_OBJECTS = \
@@ -813,8 +826,9 @@ ft_printf_OBJECTS = \
 "CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o" \
 "CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o" \
 "CMakeFiles/ft_printf.dir/libft/ft_strrev.c.o" \
-"CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o" \
-"CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o"
+"CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o" \
+"CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o" \
+"CMakeFiles/ft_printf.dir/main.c.o"
 
 # External object files for target ft_printf
 ft_printf_EXTERNAL_OBJECTS =
@@ -871,11 +885,12 @@ ft_printf: CMakeFiles/ft_printf.dir/libft/ft_strsub.c.o
 ft_printf: CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o
 ft_printf: CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o
 ft_printf: CMakeFiles/ft_printf.dir/libft/ft_strrev.c.o
-ft_printf: CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o
-ft_printf: CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o
+ft_printf: CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o
+ft_printf: CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o
+ft_printf: CMakeFiles/ft_printf.dir/main.c.o
 ft_printf: CMakeFiles/ft_printf.dir/build.make
 ft_printf: CMakeFiles/ft_printf.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Linking C executable ft_printf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Linking C executable ft_printf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ft_printf.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

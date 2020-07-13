@@ -32,7 +32,11 @@ stdlib.h
 string.h
 -
 
-/Users/dgruyere/projects/ft_printf/srcs/ft_printf.c
+/Users/dgruyere/projects/ft_printf/ft_printf/ft_itoa.c
 includes/ft_printf.h
-/Users/dgruyere/projects/ft_printf/srcs/includes/ft_printf.h
+/Users/dgruyere/projects/ft_printf/ft_printf/includes/ft_printf.h
+
+/Users/dgruyere/projects/ft_printf/ft_printf/ft_printf.c
+includes/ft_printf.h
+/Users/dgruyere/projects/ft_printf/ft_printf/includes/ft_printf.h
 

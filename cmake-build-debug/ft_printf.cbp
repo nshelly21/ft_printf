@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/dgruyere/projects/ft_printf/ft_printf/ft_itoa.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/dgruyere/projects/ft_printf/ft_printf/ft_printf.c">
+			<Option target="ft_printf"/>
+		</Unit>
 		<Unit filename="/Users/dgruyere/projects/ft_printf/includes/ft_printf.h">
 			<Option target="ft_printf"/>
 		</Unit>
@@ -246,10 +252,7 @@
 		<Unit filename="/Users/dgruyere/projects/ft_printf/libft/includes/libft.h">
 			<Option target="ft_printf"/>
 		</Unit>
-		<Unit filename="/Users/dgruyere/projects/ft_printf/srcs/ft_itoa.c">
-			<Option target="ft_printf"/>
-		</Unit>
-		<Unit filename="/Users/dgruyere/projects/ft_printf/srcs/ft_printf.c">
+		<Unit filename="/Users/dgruyere/projects/ft_printf/main.c">
 			<Option target="ft_printf"/>
 		</Unit>
 		<Unit filename="/Users/dgruyere/projects/ft_printf/CMakeLists.txt">

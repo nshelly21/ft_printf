@@ -42,6 +42,7 @@ typedef struct s_int
     short       shortnb;
 }               t_int;
 
+int		ft_printf(const char *input_str, ...);
 void	init(t_printf *printf_struct, t_int *int_struct);
 void    init_t_int(t_int *int_struct);
 void 	conv_handler(va_list ap, int i, t_printf *printf_struct);

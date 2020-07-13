@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o"
+  "CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o"
   "CMakeFiles/ft_printf.dir/libft/ft_atoi.c.o"
   "CMakeFiles/ft_printf.dir/libft/ft_bzero.c.o"
   "CMakeFiles/ft_printf.dir/libft/ft_isalnum.c.o"
@@ -51,8 +53,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/ft_printf.dir/libft/ft_strsub.c.o"
   "CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o"
   "CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o"
-  "CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o"
-  "CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o"
+  "CMakeFiles/ft_printf.dir/main.c.o"
   "ft_printf"
   "ft_printf.pdb"
 )

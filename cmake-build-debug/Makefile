@@ -123,6 +123,60 @@ ft_printf/fast:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/build
 .PHONY : ft_printf/fast
 
+ft_printf/ft_itoa.o: ft_printf/ft_itoa.c.o
+
+.PHONY : ft_printf/ft_itoa.o
+
+# target to build an object file
+ft_printf/ft_itoa.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o
+.PHONY : ft_printf/ft_itoa.c.o
+
+ft_printf/ft_itoa.i: ft_printf/ft_itoa.c.i
+
+.PHONY : ft_printf/ft_itoa.i
+
+# target to preprocess a source file
+ft_printf/ft_itoa.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.i
+.PHONY : ft_printf/ft_itoa.c.i
+
+ft_printf/ft_itoa.s: ft_printf/ft_itoa.c.s
+
+.PHONY : ft_printf/ft_itoa.s
+
+# target to generate assembly for a file
+ft_printf/ft_itoa.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.s
+.PHONY : ft_printf/ft_itoa.c.s
+
+ft_printf/ft_printf.o: ft_printf/ft_printf.c.o
+
+.PHONY : ft_printf/ft_printf.o
+
+# target to build an object file
+ft_printf/ft_printf.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o
+.PHONY : ft_printf/ft_printf.c.o
+
+ft_printf/ft_printf.i: ft_printf/ft_printf.c.i
+
+.PHONY : ft_printf/ft_printf.i
+
+# target to preprocess a source file
+ft_printf/ft_printf.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.i
+.PHONY : ft_printf/ft_printf.c.i
+
+ft_printf/ft_printf.s: ft_printf/ft_printf.c.s
+
+.PHONY : ft_printf/ft_printf.s
+
+# target to generate assembly for a file
+ft_printf/ft_printf.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.s
+.PHONY : ft_printf/ft_printf.c.s
+
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
 .PHONY : libft/ft_atoi.o
@@ -1527,59 +1581,32 @@ libft/ft_toupper.c.s:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libft/ft_toupper.c.s
 .PHONY : libft/ft_toupper.c.s
 
-srcs/ft_itoa.o: srcs/ft_itoa.c.o
+main.o: main.c.o
 
-.PHONY : srcs/ft_itoa.o
-
-# target to build an object file
-srcs/ft_itoa.c.o:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o
-.PHONY : srcs/ft_itoa.c.o
-
-srcs/ft_itoa.i: srcs/ft_itoa.c.i
-
-.PHONY : srcs/ft_itoa.i
-
-# target to preprocess a source file
-srcs/ft_itoa.c.i:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.i
-.PHONY : srcs/ft_itoa.c.i
-
-srcs/ft_itoa.s: srcs/ft_itoa.c.s
-
-.PHONY : srcs/ft_itoa.s
-
-# target to generate assembly for a file
-srcs/ft_itoa.c.s:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.s
-.PHONY : srcs/ft_itoa.c.s
-
-srcs/ft_printf.o: srcs/ft_printf.c.o
-
-.PHONY : srcs/ft_printf.o
+.PHONY : main.o
 
 # target to build an object file
-srcs/ft_printf.c.o:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o
-.PHONY : srcs/ft_printf.c.o
+main.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/main.c.o
+.PHONY : main.c.o
 
-srcs/ft_printf.i: srcs/ft_printf.c.i
+main.i: main.c.i
 
-.PHONY : srcs/ft_printf.i
+.PHONY : main.i
 
 # target to preprocess a source file
-srcs/ft_printf.c.i:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_printf.c.i
-.PHONY : srcs/ft_printf.c.i
+main.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/main.c.i
+.PHONY : main.c.i
 
-srcs/ft_printf.s: srcs/ft_printf.c.s
+main.s: main.c.s
 
-.PHONY : srcs/ft_printf.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-srcs/ft_printf.c.s:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/ft_printf.c.s
-.PHONY : srcs/ft_printf.c.s
+main.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/main.c.s
+.PHONY : main.c.s
 
 # Help Target
 help:
@@ -1590,6 +1617,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ft_printf"
+	@echo "... ft_printf/ft_itoa.o"
+	@echo "... ft_printf/ft_itoa.i"
+	@echo "... ft_printf/ft_itoa.s"
+	@echo "... ft_printf/ft_printf.o"
+	@echo "... ft_printf/ft_printf.i"
+	@echo "... ft_printf/ft_printf.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"
@@ -1746,12 +1779,9 @@ help:
 	@echo "... libft/ft_toupper.o"
 	@echo "... libft/ft_toupper.i"
 	@echo "... libft/ft_toupper.s"
-	@echo "... srcs/ft_itoa.o"
-	@echo "... srcs/ft_itoa.i"
-	@echo "... srcs/ft_itoa.s"
-	@echo "... srcs/ft_printf.o"
-	@echo "... srcs/ft_printf.i"
-	@echo "... srcs/ft_printf.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

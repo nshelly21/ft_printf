@@ -563,19 +563,3 @@ int		ft_printf(const char *input_str, ...)
 	write(1, "\n", 1); //TODO DELETE if not necessary
 	return (res); //TODO return -1 if FATAL ERROR
 }
-
-int main(void)
-{
-	char *nickname1;
-	char *nickname2;
-
-	nickname1 = "nshelly";
-	nickname2 = "dgruyere";
-
-	ft_printf("hello my nickname is %s %s %s", nickname1, nickname2, nickname1);
-	ft_printf("hello! The bomb is ticking down, %s: %d, %d, %d", nickname2, 3, 2, 1);
-	ft_printf("%s, %d in octal form is %o, in hexadecimal %x", nickname1, 100, 100, 100);
-	//TODO check hh h ll l with printf tests
-
-	return 0;
-}

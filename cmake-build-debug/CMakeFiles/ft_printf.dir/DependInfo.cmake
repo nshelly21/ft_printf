@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/Users/dgruyere/projects/ft_printf/ft_printf/ft_itoa.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/ft_printf/ft_itoa.c.o"
+  "/Users/dgruyere/projects/ft_printf/ft_printf/ft_printf.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/ft_printf/ft_printf.c.o"
   "/Users/dgruyere/projects/ft_printf/libft/ft_atoi.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_atoi.c.o"
   "/Users/dgruyere/projects/ft_printf/libft/ft_bzero.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_bzero.c.o"
   "/Users/dgruyere/projects/ft_printf/libft/ft_isalnum.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_isalnum.c.o"
@@ -56,8 +58,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/dgruyere/projects/ft_printf/libft/ft_strsub.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_strsub.c.o"
   "/Users/dgruyere/projects/ft_printf/libft/ft_tolower.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_tolower.c.o"
   "/Users/dgruyere/projects/ft_printf/libft/ft_toupper.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libft/ft_toupper.c.o"
-  "/Users/dgruyere/projects/ft_printf/srcs/ft_itoa.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/srcs/ft_itoa.c.o"
-  "/Users/dgruyere/projects/ft_printf/srcs/ft_printf.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/srcs/ft_printf.c.o"
+  "/Users/dgruyere/projects/ft_printf/main.c" "/Users/dgruyere/projects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
