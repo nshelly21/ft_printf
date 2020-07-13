@@ -591,7 +591,7 @@ void 	negnb_handler(t_printf *printf_struct)
 	}
 }
 
-void 	minus_handler(t_printf *printf_struct)
+void 	minus_handler(t_printf *ps)
 {
 	int		i;
 	int		j;
@@ -599,25 +599,25 @@ void 	minus_handler(t_printf *printf_struct)
 
 	i = 0;
 	j = 0;
-	if (!(res = malloc(sizeof(char) * (ft_strlen(printf_struct->res) + 1))))
+	if (!(res = malloc(sizeof(char) * (ft_strlen(ps->res) + 1))))
 		return ;
-	if (printf_struct->conversion == 's')
+	if (ps->conversion == 's')
 	{
-		while (i < ft_strlen(printf_struct->res) - (printf_struct->is_space + printf_struct->res_len))
+		while (i < ft_strlen(ps->res) - (ps->is_space + ps->res_len))
 			i++;
 	}
 	else
 	{
-		while (i < (int)ft_strlen(printf_struct->res) - ((printf_struct->is_space || printf_struct->is_plus) +
-						   (printf_struct->res_len < printf_struct->accuracy ? printf_struct->accuracy : printf_struct->res_len)) && printf_struct->res[i] == ' ')
+		while (i < (int)ft_strlen(ps->res) - ((ps->is_space || ps->is_plus) +
+		(ps->res_len < ps->accuracy ? ps->accuracy : ps->res_len)) && ps->res[i] == ' ')
 			i++;
 	}
-	while (printf_struct->res[i])
-		res[j++] = printf_struct->res[i++];
+	while (ps->res[i])
+		res[j++] = ps->res[i++];
 	while (i > j)
 		res[j++] = ' ';
 	res[j] = '\0';
-	printf_struct->res = res;
+	ps->res = res;
 	free(res);
 }
 
@@ -706,6 +706,5 @@ int		ft_printf(const char *input_str, ...)
 		}
 	}
 	va_end(ap);
-	write(1, "\n", 1); //TODO DELETE if not necessary
 	return (res); //TODO return -1 if FATAL ERROR
 }
