@@ -468,55 +468,54 @@ void 	plus_handler25(t_printf *printf_struct)
 	if (printf_struct->is_zero)
 	{
 		if (printf_struct->res_len < printf_struct->size)
-			printf_struct->res[0] = ' ';
+			printf_struct->res[0] = '+';
 		else if (printf_struct->res_len >= printf_struct->size)
-			printf_struct->res = put_char_first(printf_struct->res, ' ');
+			printf_struct->res = put_char_first(printf_struct->res, '+');
 	}
 	else
 	{
 		i = where_start(printf_struct);
 		if (i > 0)
-			printf_struct->res[--i] = ' ';
+			printf_struct->res[--i] = '+';
 		else if (i == 0)
-			printf_struct->res = put_char_first(printf_struct->res, ' ');
+			printf_struct->res = put_char_first(printf_struct->res, '+');
 	}
 }
 
 void 	plus_handler(t_printf *printf_struct)
 {
-	if (printf_struct->accuracy || printf_struct->size)
+	if (printf_struct->accuracy && printf_struct->size)
 	{
 		if (printf_struct->accuracy > printf_struct->size)
 		{
 			if (printf_struct->res_len < printf_struct->accuracy)
-				printf_struct->res[printf_struct->size - printf_struct->accuracy - 1] = ' ';
+				printf_struct->res[printf_struct->size - printf_struct->accuracy - 1] = '+';
 			else if ((printf_struct->conversion == 'f' || printf_struct->conversion == 'F') &&
 					 printf_struct->size > printf_struct->res_len)
 				printf_struct->res[printf_struct->size - printf_struct->res_len -
-								   printf_struct->is_point] = ' ';
+								   printf_struct->is_point] = '+';
 			else if (printf_struct->res_len >= printf_struct->accuracy)
-				printf_struct->res = put_char_first(printf_struct->res, ' ');
+				printf_struct->res = put_char_first(printf_struct->res, '+');
 		}
 		else if (printf_struct->size <= printf_struct->accuracy)
-			printf_struct->res = put_char_first(printf_struct->res, ' ');
+			printf_struct->res = put_char_first(printf_struct->res, '+');
 	}
 	else if (printf_struct->size)
 		plus_handler25(printf_struct);
 	else if (printf_struct->accuracy)
-		printf_struct->res = put_char_first(printf_struct->res, ' ');
+		printf_struct->res = put_char_first(printf_struct->res, '+');
 }
 
-void 	zero_handler(char *str, t_printf *printf_struct)
+void 	zero_handler(t_printf *printf_struct)
 {
 	int i;
 
 	i = -1;
-	while (str[++i])
+	while (printf_struct->res[++i])
 	{
-		if (str[i] == ' ')
-			str[i] = '0';
+		if (printf_struct->res[i] == ' ')
+			printf_struct->res[i] = '0';
 	}
-	printf_struct->res = str;
 }
 
 int 	where_start(t_printf *printf_struct)
@@ -624,7 +623,7 @@ void 	minus_handler(t_printf *ps)
 void 	flags_handler(const char *str, t_printf *printf_struct)
 {
 	if (printf_struct->is_zero)
-		zero_handler((char*)str, printf_struct);
+		zero_handler(printf_struct);
 	if (printf_struct->is_plus)
 		plus_handler(printf_struct);
 	if (printf_struct->is_space)
