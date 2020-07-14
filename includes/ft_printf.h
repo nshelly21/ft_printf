@@ -33,6 +33,7 @@ typedef struct	s_printf
 	int 		size;
 	int 		is_point;
 	int 		is_error_conv;
+	int 		zero_arg;
 }				t_printf;
 
 typedef struct s_int
@@ -48,7 +49,7 @@ void	init(t_printf *printf_struct, t_int *int_struct);
 void    init_t_int(t_int *int_struct);
 void 	conv_handler(va_list ap, int i, t_printf *printf_struct);
 char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct);
-char	*ft_itoa_printf_u1(unsigned long long value, int base);
+char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_struct);
 int 	where_start(t_printf *printf_struct);
 
 #endif //FT_PRINTF_FT_PRINTF_H

@@ -12,7 +12,7 @@ int main(void)
 	nickname1 = "nshelly";
 	nickname2 = "dgruyere";
 
-	/*ft_printf("hello my nickname is %s %s %s\n", nickname1, nickname2, nickname1);
+	ft_printf("hello my nickname is %s %s %s\n", nickname1, nickname2, nickname1);
 	ft_printf("hello! The bomb is ticking down, %s: %d, %d, %d\n", nickname2, 3, 2, 1);
 	ft_printf("%s, %d in octal form is %o, in hexadecimal %x\n", nickname1, 100, 100, 100);
 	ft_printf("hello my another nickname is %-20s .\n", "10");
@@ -28,7 +28,7 @@ int main(void)
 	ft_printf("%03d\n", 1);								//001
 	ft_printf("%03d\n", 123456789);						//123456789
 	ft_printf("%03d\n", -10);								//-10
-	ft_printf("%03d\n", -123456789);*/						//-123456789
+	ft_printf("%03d\n", -123456789);						//-123456789
 	//Left-justifying printf integer output
 	ft_printf("%-3d\n", 0);								//0
 	ft_printf("%-3d\n", 123456789);						//123456789
@@ -51,6 +51,9 @@ int main(void)
 	ft_printf("%s\n", "Hello");							//'Hello'
 	ft_printf("%10s\n", "Hello");						//'     Hello'
 	ft_printf("%-10s\n", "Hello");						//'Hello     '
+	ft_printf("%s\n", nickname1);
+	ft_printf("%10s\n", nickname2);
+	ft_printf("%-10s\n", nickname1);
 	//TODO check hh h ll l with printf tests
 
 	return 0;
