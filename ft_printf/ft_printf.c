@@ -308,6 +308,14 @@ void 	conv_float(va_list ap, t_printf *printf_struct)
 	float_handler(nb, printf_struct);
 }
 
+void 	conv_percent(va_list ap, t_printf *printf_struct)
+{
+	if (!(printf_struct->res = malloc(sizeof(char) * 2)))
+		return ;
+	printf_struct->res[0] = '%';
+	printf_struct->res[1] = '\0';
+}
+
 void     conv_handler(va_list ap, int i, t_printf *printf_struct)
 {
 	if (printf_struct->conversion == 's')
@@ -325,8 +333,7 @@ void     conv_handler(va_list ap, int i, t_printf *printf_struct)
     if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
         conv_float(ap, printf_struct);
     if (printf_struct->conversion == '%')
-        i = i + 0;
-        //TODO printf_struct->res = conv_?(ap, printf_struct);
+        conv_percent(ap, printf_struct);
 	// ft_putstr(printf_struct->res); NOTE not necessary anymore
 	if (printf_struct->res)
 		printf_struct->res_len = ft_strlen(printf_struct->res);
@@ -688,7 +695,7 @@ void 	minus_handler(t_printf *ps)
 		return ;
 	if (ps->conversion == 's')
 	{
-		while (i < ft_strlen(ps->res) - (ps->is_space + ps->res_len))
+		while ((unsigned long)i < ft_strlen(ps->res) - (ps->is_space + ps->res_len))
 			i++;
 	}
 	else
