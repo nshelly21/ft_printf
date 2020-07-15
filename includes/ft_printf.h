@@ -47,7 +47,7 @@ typedef struct s_int
 int		ft_printf(const char *input_str, ...);
 void	init(t_printf *printf_struct, t_int *int_struct);
 void    init_t_int(t_int *int_struct);
-void 	conv_handler(va_list ap, int i, t_printf *printf_struct);
+void 	conv_handler(va_list ap, t_printf *printf_struct);
 char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct);
 char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_struct);
 int 	where_start(t_printf *printf_struct);

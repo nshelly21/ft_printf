@@ -16,10 +16,8 @@ char	*ft_strmap(char const *s, char (*f)(char))
 {
 	int		i;
 	char	*res;
-	char	*ptr;
 
 	i = 0;
-	ptr = (char*)s;
 	if (!s || !(res = ft_memalloc((size_t)ft_strlen(s) + 1)))
 		return (NULL);
 	while (s[i])

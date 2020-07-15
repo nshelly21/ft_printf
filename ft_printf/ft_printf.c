@@ -209,6 +209,37 @@ char    *conv_string(va_list ap)
 	return (res);
 }
 
+char	*ft_charcpy(char *dest, const char src)
+{
+	dest[0] = src;
+	dest[1] = '\0';
+	return (dest);
+}
+
+char    *conv_char(va_list ap)//, t_printf *printf_struct)
+{
+	char identified_string;
+	char *res;
+
+	identified_string = va_arg(ap, int);
+	if (!(res = (char*)malloc(sizeof(char) * 1)))
+		return (0); //TODO write proper exit_error function
+	res = ft_charcpy(res, (char)identified_string);
+	return (res);
+}
+
+char    *conv_pointer(va_list ap)//, t_printf *printf_struct)
+{
+	char identified_string;
+	char *res;
+
+	identified_string = va_arg(ap, int);
+	if (!(res = (char*)malloc(sizeof(char) * 1)))
+		exit(0); //TODO write proper exit_error function
+	res = ft_charcpy(res, (char)identified_string);
+	return (res);
+}
+
 char 	*put_char_first(char *str, char c)
 {
 	char 	*tmp;
@@ -222,7 +253,7 @@ char 	*put_char_first(char *str, char c)
 	while (str[++i])
 		tmp[i + 1] = str[i];
 	tmp[i + 1] = '\0';
-	free(str);
+	//free(str);
 	return (tmp);
 }
 
@@ -308,7 +339,7 @@ void 	conv_float(va_list ap, t_printf *printf_struct)
 	float_handler(nb, printf_struct);
 }
 
-void 	conv_percent(va_list ap, t_printf *printf_struct)
+void 	conv_percent( t_printf *printf_struct)
 {
 	if (!(printf_struct->res = malloc(sizeof(char) * 2)))
 		return ;
@@ -316,26 +347,27 @@ void 	conv_percent(va_list ap, t_printf *printf_struct)
 	printf_struct->res[1] = '\0';
 }
 
-void     conv_handler(va_list ap, int i, t_printf *printf_struct)
+void     conv_handler(va_list ap, t_printf *printf_struct)
 {
 	if (printf_struct->conversion == 's')
 		printf_struct->res = conv_string(ap);
-	/*TODO else if (printf_struct->error_conv == 1 || printf_struct->conversion == 'c')
-		printf_struct->res = conv_char(ap, printf_struct);*/
-	if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
+	else if (printf_struct->conversion == 'c')
+		printf_struct->res = conv_char(ap);
+	else if (printf_struct->conversion == 'p')
+		printf_struct->res = conv_pointer(ap);
+	else if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
         printf_struct->res = conv_int(ap, printf_struct);
-    if (printf_struct->conversion == 'o')
-        printf_struct->res = conv_oct(ap, printf_struct);
-    if (printf_struct->conversion == 'u')
+    else if (printf_struct->conversion == 'o')
+		printf_struct->res = conv_oct(ap, printf_struct);
+    else if (printf_struct->conversion == 'u')
         printf_struct->res = conv_unsint(ap, printf_struct);
-    if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
-        printf_struct->res = conv_hex(ap, printf_struct);
-    if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
+    else if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
+		printf_struct->res = conv_hex(ap, printf_struct);
+    else if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
         conv_float(ap, printf_struct);
-    if (printf_struct->conversion == '%')
-        conv_percent(ap, printf_struct);
-	// ft_putstr(printf_struct->res); NOTE not necessary anymore
-	if (printf_struct->res)
+    else if (printf_struct->conversion == '%')
+        conv_percent(printf_struct);
+	else if (printf_struct->res)
 		printf_struct->res_len = ft_strlen(printf_struct->res);
 }
 
@@ -772,6 +804,41 @@ void init(t_printf *printf_struct, t_int *int_struct)
 	init_t_int(int_struct);
 }
 
+int is_conversion(const char c)
+{
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' || c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'f')
+	{
+		return (1);
+	}
+	return (0);
+}
+int is_digit(char c)
+{
+	if(c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+int second_percent(const char *str)
+{
+	int i;
+
+	i = 0;
+	if(str[0] == '%')
+		return (2);
+	if(is_digit(str[0]) || str[0] == '-' || str[0] == '+')
+	{
+		if (!is_digit(str[0]))
+			i++;
+		while ((!is_conversion(str[i]) && is_digit(str[i])) || str[i] == '%')
+		{
+			if (str[i] == '%')
+				return (i + 2);
+			i++;
+		}
+	}
+	return(0);
+}
+
 int		ft_printf(const char *input_str, ...)
 {
 	va_list		ap;
@@ -779,6 +846,7 @@ int		ft_printf(const char *input_str, ...)
 	t_printf	printf_struct;
 	t_int       int_struct;
 	int		i;
+	int     pos_percent;
 
 	i = 0;
 	res = 0;
@@ -787,15 +855,24 @@ int		ft_printf(const char *input_str, ...)
 	while (input_str[i])
 	{
 		while (input_str[i] && input_str[i] != '%')
+		{
 			res += ft_putchar(input_str[i++]);
-		if (input_str[i])
+		}
+		pos_percent = second_percent(&input_str[i+1]);
+		if(pos_percent && input_str[i] == '%')
+		{
+			write(1, "%", 1);
+			i += pos_percent;
+		}
+		else if (input_str[i])
 		{
 			i = parse_flags(input_str, ++i, &printf_struct);
-			conv_handler(ap, i++, &printf_struct);
+			conv_handler(ap, &printf_struct);
 			accuracy_and_size_handler(&printf_struct);
 			flags_handler(input_str, &printf_struct);
 			ft_putstr(printf_struct.res);
 			init_t_printf(&printf_struct);
+			i++;
 		}
 	}
 	va_end(ap);

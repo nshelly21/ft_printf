@@ -12,13 +12,23 @@ int main(void)
 	nickname1 = "nshelly";
 	nickname2 = "dgruyere";
 
-	ft_printf("hello my nickname is %s %s %s\n", nickname1, nickname2, nickname1);
+
+	 ft_printf("hello my nickname is %s %s %s\n", nickname1, nickname2, nickname1);
 	ft_printf("hello! The bomb is ticking down, %s: %d, %d, %d\n", nickname2, 3, 2, 1);
 	ft_printf("%s, %d in octal form is %o, in hexadecimal %x\n", nickname1, 100, 100, 100);
 	ft_printf("hello my another nickname is %-20s .\n", "10");
+
 	//simple TESTS FROM https://alvinalexander.com/programming/printf-format-cheat-sheet/
 	//integer formatting
-	ft_printf("%5d\n", 10);								//'   10'
+
+	//ft_printf("hello%#o\n", 10);
+	ft_printf("hello %#lx\n", "hello");
+	printf("hello %p\n", "hello");
+	printf("hello %#lx\n", "hello");
+	printf("hello %#o\n", 10);
+
+	ft_printf("hola%c\n", 'd');
+	printf("hola%c\n", 'd');
 	ft_printf("%-5d\n", 10);							//'10   '
 	ft_printf("%05d\n", 10);							//'00010'
 	ft_printf("%+5d\n", 10);							//'  +10'
