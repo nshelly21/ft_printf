@@ -235,14 +235,14 @@ char	*ft_charcpy(char *dest, const char src)
 
 char    *conv_char(va_list ap, t_printf *printf_struct)
 {
-	char identified_string;
+	char identified_char;
 	char *res;
 
 	if (printf_struct->error_conv == -42)
-		identified_string = va_arg(ap, int);
+		identified_char = va_arg(ap, int);
 	else
-		identified_string = printf_struct->error_conv;
-	if (!identified_string)
+		identified_char = printf_struct->error_conv;
+	if (identified_char == 0)
 	{
 		printf_struct->zero_arg = 1;
 		if (printf_struct->error_conv == -42)
@@ -251,7 +251,7 @@ char    *conv_char(va_list ap, t_printf *printf_struct)
 	}
 	if (!(res = (char*)malloc(sizeof(char) * 1)))
 		return (0); //TODO write proper exit_error function
-	res = ft_charcpy(res, (char)identified_string);
+	res = ft_charcpy(res, (char)identified_char);
 	return (res);
 }
 
@@ -823,7 +823,6 @@ void 	flags_handler(const char *str, t_printf *ps)
 void    init_t_printf2(t_printf *printf_struct)
 {
 	printf_struct->conversion = 0;
-	printf_struct->res = NULL;
 	printf_struct->res_len = 0;
 	printf_struct->is_neg = 0;
 	printf_struct->is_l = 0;
@@ -845,6 +844,7 @@ void    init_t_printf2(t_printf *printf_struct)
 
 void	init_t_printf1(t_printf *printf_struct)
 {
+	printf_struct->res = NULL;
 	printf_struct->ret_value = 0;
 	printf_struct->size = 0;
 	init_t_printf2(printf_struct);
@@ -932,13 +932,27 @@ void	fix_flag_errors(t_printf *ps)
 	}
 }
 
+/*int 	parse(const char *input_str, va_list ap, t_printf *printf_struct, int i)
+{
+	i = parse_flags(input_str, i, printf_struct);
+	conv_handler(ap, printf_struct);
+	fix_flag_errors(printf_struct);
+	accuracy_and_size_handler(printf_struct);
+	flags_handler(input_str, printf_struct);
+	printf_struct->ret_value += ft_putstr(printf_struct->res);
+	if (printf_struct->conversion == 'c' && printf_struct->zero_arg)
+		ft_putchar('\0');
+	init_t_printf2(printf_struct);
+	return (input_str[i] == '\0' ? i : i + 1);
+}*/
+
 int		ft_printf(const char *input_str, ...)
 {
 	va_list		ap;
 	t_printf	printf_struct;
 	t_int       int_struct;
 	int		i;
-	int     pos_percent;
+	//int     pos_percent;
 
 	i = 0;
 	init(&printf_struct, &int_struct);
@@ -946,16 +960,14 @@ int		ft_printf(const char *input_str, ...)
 	while (input_str[i])
 	{
 		while (input_str[i] && input_str[i] != '%')
-		{
 			printf_struct.ret_value += ft_putchar(input_str[i++]);
-		}
-		pos_percent = second_percent(&input_str[i + 1]);
+		/*pos_percent = second_percent(&input_str[i + 1]);
 		if(pos_percent && input_str[i] == '%')
 		{
 			write(1, "%", 1);
 			i += pos_percent;
-		}
-		else if (input_str[i])
+		}*/
+		if (input_str[i])
 		{
 			i = parse_flags(input_str, ++i, &printf_struct);
 			conv_handler(ap, &printf_struct);
@@ -964,7 +976,9 @@ int		ft_printf(const char *input_str, ...)
 			flags_handler(input_str, &printf_struct);
 			printf_struct.ret_value += ft_putstr(printf_struct.res);
 			init_t_printf2(&printf_struct);
-			i++;
+			if (printf_struct.conversion == 'c' && printf_struct.zero_arg)
+				ft_putchar('\0');
+			i = input_str[i] == '\0' ? i : i + 1;
 		}
 	}
 	va_end(ap);

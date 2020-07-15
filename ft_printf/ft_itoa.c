@@ -26,7 +26,7 @@ char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
 
     if (value == 0)
 	{
-    	printf_struct->zero_arg = 0;
+    	printf_struct->zero_arg = 1;
     	if (!(printf_struct->accuracy) && printf_struct->is_point)
     		return (ft_strnew(0));
     	return (ft_strdup("0"));
