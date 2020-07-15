@@ -196,16 +196,33 @@ char    *conv_int(va_list ap, t_printf *printf_struct)
 	}
     return(conv_int25(ap, printf_struct));
 }
-//TODO
-char    *conv_string(va_list ap)
-{
-	char *identified_string;
-	char *res;
 
+char    *conv_string(va_list ap, t_printf *printf_struct)
+{
+	char	*identified_string;
+	char	*res;
+	int 	i;
+
+	i = -1;
 	identified_string = va_arg(ap, typeof(identified_string));
-	if (!(res = (char*)malloc(sizeof(char) * (ft_strlen(identified_string) + 1))))
-		return (0); //TODO write proper exit_error function
-	res = ft_strcpy(res, identified_string);
+	if (!identified_string && !printf_struct->is_point)
+		return (ft_strdup("(null)"));
+	if (!printf_struct->accuracy && printf_struct->is_point)
+		return (ft_strnew(0));
+	if (!printf_struct->accuracy)
+	{
+		if (!(res = (char *) malloc(sizeof(char) * (ft_strlen(identified_string) + 1))))
+			return (0); //TODO write proper exit_error function
+		res = ft_strcpy(res, identified_string);
+	}
+	else
+	{
+		if (!(res = (char *) malloc(sizeof(char) * (printf_struct->accuracy + 1))))
+			return (0);
+		while (++i < printf_struct->accuracy)
+			res[i] = identified_string[i];
+		res[i] = '\0';
+	}
 	return (res);
 }
 
@@ -216,12 +233,22 @@ char	*ft_charcpy(char *dest, const char src)
 	return (dest);
 }
 
-char    *conv_char(va_list ap)//, t_printf *printf_struct)
+char    *conv_char(va_list ap, t_printf *printf_struct)
 {
 	char identified_string;
 	char *res;
 
-	identified_string = va_arg(ap, int);
+	if (printf_struct->error_conv == -42)
+		identified_string = va_arg(ap, int);
+	else
+		identified_string = printf_struct->error_conv;
+	if (!identified_string)
+	{
+		printf_struct->zero_arg = 1;
+		if (printf_struct->error_conv == -42)
+			printf_struct->ret_value += 1;
+		return (ft_strnew(0));
+	}
 	if (!(res = (char*)malloc(sizeof(char) * 1)))
 		return (0); //TODO write proper exit_error function
 	res = ft_charcpy(res, (char)identified_string);
@@ -324,19 +351,25 @@ void	float_handler(long double nb, t_printf *printf_struct)
 	round1(printf_struct);
 }
 
-void 	conv_float(va_list ap, t_printf *printf_struct)
+void 	conv_float(va_list ap, t_printf *ps)
 {
 	long double	nb;
 
 	nb = (long double)va_arg(ap, double);
-	if (!(printf_struct->accuracy) && !(printf_struct->is_point))
-		printf_struct->accuracy = 6;
+	if (!(ps->accuracy) && !(ps->is_point))
+		ps->accuracy = 6;
+	if ((1.0 / 0.0) == nb)
+	{
+		ps->is_inf = 1;
+		ps->res = (ps->conversion == 'f' ? "inf" : "INF");
+		return ;
+	}
 	if (nb < 0)
 	{
-		printf_struct->is_neg = 1;
+		ps->is_neg = 1;
 		nb = nb * (-1);
 	}
-	float_handler(nb, printf_struct);
+	float_handler(nb, ps);
 }
 
 void 	conv_percent( t_printf *printf_struct)
@@ -350,24 +383,24 @@ void 	conv_percent( t_printf *printf_struct)
 void     conv_handler(va_list ap, t_printf *printf_struct)
 {
 	if (printf_struct->conversion == 's')
-		printf_struct->res = conv_string(ap);
-	else if (printf_struct->conversion == 'c')
-		printf_struct->res = conv_char(ap);
-	else if (printf_struct->conversion == 'p')
+		printf_struct->res = conv_string(ap, printf_struct);
+	if (printf_struct->conversion == 'c' || printf_struct->error_conv != -42)
+		printf_struct->res = conv_char(ap, printf_struct);
+	if (printf_struct->conversion == 'p')
 		printf_struct->res = conv_pointer(ap);
-	else if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
+	if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
         printf_struct->res = conv_int(ap, printf_struct);
-    else if (printf_struct->conversion == 'o')
+    if (printf_struct->conversion == 'o')
 		printf_struct->res = conv_oct(ap, printf_struct);
-    else if (printf_struct->conversion == 'u')
+    if (printf_struct->conversion == 'u')
         printf_struct->res = conv_unsint(ap, printf_struct);
-    else if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
+    if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
 		printf_struct->res = conv_hex(ap, printf_struct);
-    else if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
+    if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
         conv_float(ap, printf_struct);
-    else if (printf_struct->conversion == '%')
+    if (printf_struct->conversion == '%')
         conv_percent(printf_struct);
-	else if (printf_struct->res)
+	if (printf_struct->res)
 		printf_struct->res_len = ft_strlen(printf_struct->res);
 }
 
@@ -462,11 +495,14 @@ int		parse_flags(const char *input_str, int i, t_printf *printf_struct)
 			printf_struct->accuracy = 0;
 	}
 	if (is_length(input_str, i))
-		i = init_length(input_str, i, printf_struct);
+		i = i + init_length(input_str, i, printf_struct); //TODO CHECK PLEASE
 	if (is_conv(input_str, i))
 		printf_struct->conversion = input_str[i];
 	else
-		printf_struct->is_error_conv = 1; //TODO check how printf behaviours in this way
+	{
+		printf_struct->error_conv = input_str[i];
+		printf_struct->conversion = 'c';
+	}
 	return (i);
 }
 
@@ -732,8 +768,8 @@ void 	minus_handler(t_printf *ps)
 	}
 	else
 	{
-		while (i < (int)ft_strlen(ps->res) - ((ps->is_space || ps->is_plus) +
-		(ps->res_len < ps->accuracy ? ps->accuracy : ps->res_len)) && ps->res[i] == ' ')
+		while (i < (int)ft_strlen(ps->res) - ((ps->is_space || ps->is_plus) + (ps->res_len +
+		ps->is_nan + ps->is_inf < ps->accuracy ? ps->accuracy : ps->res_len)) && ps->res[i] == ' ')
 			i++;
 	}
 	while (ps->res[i])
@@ -745,49 +781,73 @@ void 	minus_handler(t_printf *ps)
 	free(res);
 }
 
-void 	flags_handler(const char *str, t_printf *printf_struct)
+void 	inf_case_handler(t_printf *ps)
 {
-	if (printf_struct->is_zero)
-		zero_handler(printf_struct);
-	if (printf_struct->is_plus)
-		plus_handler(printf_struct);
-	if (printf_struct->is_space)
-		space_handler(printf_struct);
-	if ((printf_struct->conversion == 'x' || printf_struct->conversion == 'X') && printf_struct->is_hash)
-		hash_hex_handler((char*)str, printf_struct);
-	if (printf_struct->conversion == 'o' && !printf_struct->accuracy && printf_struct->is_hash)
-		hash_oct_handler((char*)str, printf_struct);
-	if ((printf_struct->conversion == 'f' || printf_struct->conversion == 'F') && printf_struct->is_hash)
-		hash_float_handler((char*)str, printf_struct);
-	if (printf_struct->is_neg)
-		negnb_handler(printf_struct);
-	if (printf_struct->is_minus)
-		minus_handler(printf_struct);
-	/*TODO handle inf, nan*/
+	int	i;
+
+	i = 0;
+	while (ps->res[i] == ' ')
+		i++;
+	if (--i >= 0)
+		ps->res[i] = ps->is_plus? '+' : ' ';
+	else
+		ps->res = put_char_first(ps->res, ps->is_plus? '+' : ' ');
 }
 
-void    init_t_printf(t_printf *printf_struct)
+void 	flags_handler(const char *str, t_printf *ps)
+{
+	if (!ps->is_nan && !ps->is_inf)
+	{
+		if (ps->is_zero)
+			zero_handler(ps);
+		if (ps->is_plus && !ps->is_nan)
+			plus_handler(ps);
+		if (ps->is_space && !ps->is_nan)
+			space_handler(ps);
+		if ((ps->conversion == 'x' || ps->conversion == 'X' || ps->conversion == 'p') &&
+		ps->is_hash && ps->zero_arg && !(ps->conversion == 'x' || ps->conversion == 'X'))
+			hash_hex_handler((char*)str, ps);
+		if (ps->conversion == 'o' && !ps->accuracy && ps->is_hash)
+			hash_oct_handler((char*)str, ps);
+		if ((ps->conversion == 'f' || ps->conversion == 'F') && ps->is_hash)
+			hash_float_handler((char*)str, ps);
+		if (ps->is_neg)
+			negnb_handler(ps);
+	}
+	if (ps->is_inf && (ps->is_plus || ps->is_space))
+		inf_case_handler(ps);
+	if (ps->is_minus)
+		minus_handler(ps);
+}
+
+void    init_t_printf2(t_printf *printf_struct)
 {
 	printf_struct->conversion = 0;
 	printf_struct->res = NULL;
 	printf_struct->res_len = 0;
 	printf_struct->is_neg = 0;
-	printf_struct->iszero = 0;
 	printf_struct->is_l = 0;
 	printf_struct->is_ll = 0;
 	printf_struct->is_h = 0;
 	printf_struct->is_hh = 0;
-	printf_struct->is_L = 0;
 	printf_struct->is_hash = 0;
 	printf_struct->is_zero = 0;
 	printf_struct->is_minus = 0;
 	printf_struct->is_plus = 0;
 	printf_struct->is_space = 0;
 	printf_struct->accuracy = 0;
-	printf_struct->size = 0;
 	printf_struct->is_point = 0;
-	printf_struct->is_error_conv = 0;
+	printf_struct->error_conv = -42;
 	printf_struct->zero_arg = 0;
+	printf_struct->is_nan = 0;
+	printf_struct->is_inf = 0;
+}
+
+void	init_t_printf1(t_printf *printf_struct)
+{
+	printf_struct->ret_value = 0;
+	printf_struct->size = 0;
+	init_t_printf2(printf_struct);
 }
 
 void    init_t_int(t_int *int_struct)
@@ -800,7 +860,7 @@ void    init_t_int(t_int *int_struct)
 
 void init(t_printf *printf_struct, t_int *int_struct)
 {
-	init_t_printf(printf_struct);
+	init_t_printf1(printf_struct);
 	init_t_int(int_struct);
 }
 
@@ -839,26 +899,57 @@ int second_percent(const char *str)
 	return(0);
 }
 
+void	fix_flag_errors(t_printf *ps)
+{
+	if (ps->is_nan)
+	{
+		ps->is_plus = 0;
+		ps->is_space = 0;
+	}
+	if (ps->is_plus && ps->conversion == 'u')
+		ps->is_plus = 0;
+	if (ps->is_space && ps->conversion == 'u')
+		ps->is_space = 0;
+	if (ps->zero_arg && ps->conversion != 'f' && ps->conversion != 'F')
+		ps->is_hash = 0;
+	if (ps->conversion == 'x' || ps->conversion == 'X' || ps->conversion == 'p' ||
+	ps->conversion == 'o' || ps->conversion == 's' || ps->conversion == 'c')
+	{
+		ps->is_plus = 0;
+		ps->is_space = 0;
+	}
+	if (ps->is_space && (ps->conversion == 'f' || ps->conversion == 'F'))
+		ps->is_zero = 0;
+	if ((ps->accuracy || ps->is_minus) && ps->conversion != 'f' && ps->conversion != 'F')
+		ps->is_zero = 0;
+	if (ps->is_plus)
+		ps->is_space = 0;
+	if (ps->conversion == 'c' || ps ->conversion == '%')
+	{
+		ps->accuracy = 0;
+		ps->is_space = 0;
+		ps->is_plus = 0;
+	}
+}
+
 int		ft_printf(const char *input_str, ...)
 {
 	va_list		ap;
-	int		res;
 	t_printf	printf_struct;
 	t_int       int_struct;
 	int		i;
 	int     pos_percent;
 
 	i = 0;
-	res = 0;
 	init(&printf_struct, &int_struct);
 	va_start(ap, input_str);
 	while (input_str[i])
 	{
 		while (input_str[i] && input_str[i] != '%')
 		{
-			res += ft_putchar(input_str[i++]);
+			printf_struct.ret_value += ft_putchar(input_str[i++]);
 		}
-		pos_percent = second_percent(&input_str[i+1]);
+		pos_percent = second_percent(&input_str[i + 1]);
 		if(pos_percent && input_str[i] == '%')
 		{
 			write(1, "%", 1);
@@ -868,13 +959,14 @@ int		ft_printf(const char *input_str, ...)
 		{
 			i = parse_flags(input_str, ++i, &printf_struct);
 			conv_handler(ap, &printf_struct);
+			fix_flag_errors(&printf_struct);
 			accuracy_and_size_handler(&printf_struct);
 			flags_handler(input_str, &printf_struct);
-			ft_putstr(printf_struct.res);
-			init_t_printf(&printf_struct);
+			printf_struct.ret_value += ft_putstr(printf_struct.res);
+			init_t_printf2(&printf_struct);
 			i++;
 		}
 	}
 	va_end(ap);
-	return (res); //TODO return -1 if FATAL ERROR
+	return (printf_struct.ret_value); //TODO return -1 if FATAL ERROR
 }

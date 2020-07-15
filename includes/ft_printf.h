@@ -18,12 +18,10 @@ typedef struct	s_printf
 	char 		*res;
 	int 		res_len;
 	int         is_neg;
-	int			iszero;
 	int 		is_l;
 	int 		is_ll;
 	int 		is_h;
 	int 		is_hh;
-	int 		is_L;
 	int 		is_hash;
 	int 		is_zero;
 	int 		is_minus;
@@ -32,8 +30,11 @@ typedef struct	s_printf
 	int 		accuracy;
 	int 		size;
 	int 		is_point;
-	int 		is_error_conv;
+	int 		error_conv;
 	int 		zero_arg;
+	int			ret_value;
+	int 		is_nan;
+	int 		is_inf;
 }				t_printf;
 
 typedef struct s_int
