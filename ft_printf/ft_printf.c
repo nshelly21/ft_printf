@@ -255,16 +255,9 @@ char    *conv_char(va_list ap, t_printf *printf_struct)
 	return (res);
 }
 
-char    *conv_pointer(va_list ap)//, t_printf *printf_struct)
+void    conv_pointer(va_list ap)//, t_printf *printf_struct)
 {
-	char identified_string;
-	char *res;
-
-	identified_string = va_arg(ap, int);
-	if (!(res = (char*)malloc(sizeof(char) * 1)))
-		exit(0); //TODO write proper exit_error function
-	res = ft_charcpy(res, (char)identified_string);
-	return (res);
+	ft_printf("%#lx",va_arg(ap, int));
 }
 
 char 	*put_char_first(char *str, char c)
@@ -387,7 +380,7 @@ void     conv_handler(va_list ap, t_printf *printf_struct)
 	if (printf_struct->conversion == 'c' || printf_struct->error_conv != -42)
 		printf_struct->res = conv_char(ap, printf_struct);
 	if (printf_struct->conversion == 'p')
-		printf_struct->res = conv_pointer(ap);
+		conv_pointer(ap);
 	if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
         printf_struct->res = conv_int(ap, printf_struct);
     if (printf_struct->conversion == 'o')
@@ -399,9 +392,13 @@ void     conv_handler(va_list ap, t_printf *printf_struct)
     if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
         conv_float(ap, printf_struct);
     if (printf_struct->conversion == '%')
-        conv_percent(printf_struct);
+    {
+	    conv_percent(printf_struct);
+    }
 	if (printf_struct->res)
+	{
 		printf_struct->res_len = ft_strlen(printf_struct->res);
+	}
 }
 
 int 	init_flags(const char *str, int i, t_printf *printf_struct)
@@ -568,15 +565,15 @@ void 	hash_float_handler(char *str, t_printf *printf_struct)
 
 void 	hash_oct_handler(char *str, t_printf *printf_struct)
 {
-	int i;
+	/*int i;
 
 	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (--i >= 0)
 		str[i] = '0';
-	else
-		str = put_char_first(str, '0');
+	else*/
+	str = put_char_first(printf_struct->res, '0');
 	printf_struct->res = str;
 }
 
@@ -596,12 +593,12 @@ char	*hash_hex_handler25(char *str, char *res)
 
 void 	hash_hex_handler(char *str, t_printf *printf_struct)
 {
-	int		i;
-	char	*res;
+	//int		i;
+	char	res;
 
-	i = 0;
-	res = printf_struct->conversion == 'x' ? "0x" : "0X";
-	while (str[i] == ' ')
+	//i = 0;
+	res = printf_struct->conversion == 'x' ? 'x' : 'X';
+	/*while (str[i] == ' ')
 		i++;
 	if (--i > -1)
 	{
@@ -617,7 +614,9 @@ void 	hash_hex_handler(char *str, t_printf *printf_struct)
 			str = put_char_first(str, res[1]);
 			str = put_char_first(str, res[0]);
 		}
-	}
+	}*/
+	str = put_char_first(printf_struct->res, res);
+	str = put_char_first(str, '0');
 	printf_struct->res = str;
 }
 
@@ -805,14 +804,15 @@ void 	flags_handler(const char *str, t_printf *ps)
 		if (ps->is_space && !ps->is_nan)
 			space_handler(ps);
 		if ((ps->conversion == 'x' || ps->conversion == 'X' || ps->conversion == 'p') &&
-		ps->is_hash && ps->zero_arg && !(ps->conversion == 'x' || ps->conversion == 'X'))
+		ps->is_hash)// && ps->zero_arg) && !(ps->conversion == 'x' || ps->conversion == 'X'))
 			hash_hex_handler((char*)str, ps);
 		if (ps->conversion == 'o' && !ps->accuracy && ps->is_hash)
 			hash_oct_handler((char*)str, ps);
-		if ((ps->conversion == 'f' || ps->conversion == 'F') && ps->is_hash)
-			hash_float_handler((char*)str, ps);
 		if (ps->is_neg)
 			negnb_handler(ps);
+		//if ((ps->conversion == 'f' || ps->conversion == 'F') && ps->is_hash)
+		//	hash_float_handler((char*)str, ps);
+
 	}
 	if (ps->is_inf && (ps->is_plus || ps->is_space))
 		inf_case_handler(ps);
