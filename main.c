@@ -69,6 +69,7 @@ int main(void)
 	//ft_printf("%%");
 	//ft_printf("this % i number", 17);
 	ft_printf("%5c", '\0');
+	ft_printf("\n");
 	/*ft_putchar('\n');
 	printf("%%");
 	ft_putchar('\n');

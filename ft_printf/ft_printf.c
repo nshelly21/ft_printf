@@ -236,12 +236,12 @@ char    *conv_string(va_list ap, t_printf *printf_struct)
 	return (res);
 }
 
-char	*ft_charcpy(char *dest, const char src)
+/*char	*ft_charcpy(char *dest, const char src)
 {
 	dest[0] = src;
 	dest[1] = '\0';
 	return (dest);
-}
+}*/
 
 char    *conv_char(va_list ap, t_printf *printf_struct)
 {
@@ -261,7 +261,8 @@ char    *conv_char(va_list ap, t_printf *printf_struct)
 	}
 	if (!(res = (char*)malloc(sizeof(char) * 2)))
 		return (0); //TODO write proper exit_error function
-	res = ft_charcpy(res, (char)identified_char);
+	res[0] = identified_char;
+	res[1] = '\0';
 	return (res);
 }
 
@@ -425,13 +426,9 @@ void     conv_handler(va_list ap, t_printf *printf_struct)
     if (printf_struct->conversion == 'F')
 		printf_struct->res = capitalize(conv_hex(ap, printf_struct));
     if (printf_struct->conversion == '%')
-    {
 	    conv_percent(printf_struct);
-    }
 	if (printf_struct->res)
-	{
 		printf_struct->res_len = ft_strlen(printf_struct->res);
-	}
 }
 
 int 	init_flags(const char *str, int i, t_printf *printf_struct)
@@ -566,9 +563,11 @@ void 	size_handler(t_printf *printf_struct)
 	int 	i;
 	int 	len;
 
-	tmp = NULL;
+	tmp = printf_struct->res;
 	i = 0;
 	len = 0;
+	if (printf_struct->conversion == 'c' && printf_struct->zero_arg)
+		printf_struct->size -= 1;
 	if (printf_struct->res)
 		len = printf_struct->size - (int)ft_strlen(printf_struct->res);
 	if (!(tmp = (char*)malloc(sizeof(char) * len + 1)))
@@ -884,9 +883,8 @@ void 	flags_handler(const char *str, t_printf *ps)
 			hash_oct_handler((char*)str, ps);
 		if (ps->is_neg)
 			negnb_handler(ps);
-		//if ((ps->conversion == 'f' || ps->conversion == 'F') && ps->is_hash)
-		//	hash_float_handler((char*)str, ps);
-
+		if ((ps->conversion == 'f' || ps->conversion == 'F') && ps->is_hash)
+			hash_float_handler((char*)str, ps);
 	}
 	if (ps->is_inf && (ps->is_plus || ps->is_space))
 		inf_case_handler(ps);
@@ -1042,10 +1040,12 @@ int		ft_printf(const char *input_str, ...)
 			fix_flag_errors(&printf_struct);
 			accuracy_and_size_handler(&printf_struct);
 			flags_handler(printf_struct.res, &printf_struct);
-			printf_struct.ret_value += ft_putstr(printf_struct.res);
-			init_t_printf2(&printf_struct);
-			if (printf_struct.conversion == 'c' && printf_struct.zero_arg)
+			if (printf_struct.conversion == 'c' && printf_struct.zero_arg  && printf_struct.is_minus)
 				ft_putchar('\0');
+			printf_struct.ret_value += ft_putstr(printf_struct.res);
+			if (printf_struct.conversion == 'c' && printf_struct.zero_arg && !printf_struct.is_minus)
+				ft_putchar('\0');
+			init_t_printf2(&printf_struct);
 			i = input_str[i] == '\0' ? i : i + 1;
 		}
 	}
