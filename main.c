@@ -68,7 +68,7 @@ int main(void)
 	long long int llmax = 9223372036854775807;
 	//ft_printf("%%");
 	//ft_printf("this % i number", 17);
-	ft_printf("%p", NULL);
+	ft_printf("%5c", '\0');
 	/*ft_putchar('\n');
 	printf("%%");
 	ft_putchar('\n');

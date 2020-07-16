@@ -259,7 +259,7 @@ char    *conv_char(va_list ap, t_printf *printf_struct)
 			printf_struct->ret_value += 1;
 		return (ft_strnew(0));
 	}
-	if (!(res = (char*)malloc(sizeof(char) * 1)))
+	if (!(res = (char*)malloc(sizeof(char) * 2)))
 		return (0); //TODO write proper exit_error function
 	res = ft_charcpy(res, (char)identified_char);
 	return (res);
@@ -996,6 +996,8 @@ void	fix_flag_errors(t_printf *ps)
 		ps->is_space = 0;
 		ps->is_plus = 0;
 	}
+	if (ps->conversion == 'p')
+		ps->is_hash = 1;
 }
 
 /*int 	parse(const char *input_str, va_list ap, t_printf *printf_struct, int i)
