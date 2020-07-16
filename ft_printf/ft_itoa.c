@@ -33,6 +33,7 @@ char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
 	}
     if (value < 0)
     {
+    	printf_struct->is_plus = 0;
         printf_struct->is_neg = 1;
 		value = value * (-1);
     }

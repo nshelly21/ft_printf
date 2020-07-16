@@ -66,7 +66,8 @@ int main(void)
 	//TODO check hh h ll l with printf tests
 
 	//ft_printf("%%");
-	ft_putchar('\n');
+	ft_printf("%+8.5i", 34);
+	/*ft_putchar('\n');
 	printf("%%");
 	ft_putchar('\n');
 	ft_putchar('\n');
@@ -87,7 +88,7 @@ int main(void)
 	ft_putchar('\n');
 	ft_printf("%-05s");
 	ft_putchar('\n');
-	printf("%-05s%");
+	printf("%-05s%");*/
 	/*
 	Test  12 (nocrash_nullspec_5w) : FAILED.
 			(nocrash test: automatically passes provided no unexpected failure)

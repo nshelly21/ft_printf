@@ -188,7 +188,10 @@ char    *conv_int(va_list ap, t_printf *printf_struct)
 	{
 		int_struct.longlongnb = va_arg(ap, long long);
 		if (int_struct.longlongnb < 0)
+		{
+			printf_struct->is_plus = 0;
 			printf_struct->is_neg = 1;
+		}
 		if (int_struct.longlongnb < -9223372036854775807 || int_struct.longlongnb > 9223372036854775807)
 			return(ft_itoa_printf_u1((unsigned long long)int_struct.longlongnb, 10, printf_struct));
 		else
@@ -646,7 +649,7 @@ void 	plus_handler(t_printf *printf_struct)
 {
 	if (printf_struct->accuracy && printf_struct->size)
 	{
-		if (printf_struct->accuracy > printf_struct->size)
+		if (printf_struct->size > printf_struct->accuracy)
 		{
 			if (printf_struct->res_len < printf_struct->accuracy)
 				printf_struct->res[printf_struct->size - printf_struct->accuracy - 1] = '+';
@@ -663,6 +666,8 @@ void 	plus_handler(t_printf *printf_struct)
 	else if (printf_struct->size)
 		plus_handler25(printf_struct);
 	else if (printf_struct->accuracy)
+		printf_struct->res = put_char_first(printf_struct->res, '+');
+	else if (!printf_struct->accuracy || !printf_struct->size)
 		printf_struct->res = put_char_first(printf_struct->res, '+');
 }
 
@@ -712,6 +717,8 @@ void 	space_handler25(t_printf *printf_struct)
 
 void 	space_handler(t_printf *printf_struct)
 {
+	if (!printf_struct->accuracy || !printf_struct->size)
+		printf_struct->res = put_char_first(printf_struct->res, ' ');
 	if (printf_struct->accuracy || printf_struct->size)
 	{
 		if (printf_struct->accuracy > printf_struct->size)
@@ -738,7 +745,9 @@ void 	negnb_handler(t_printf *printf_struct)
 {
 	int	i;
 
-	i = where_start(printf_struct);
+	i = 0;
+	while (printf_struct->res[i] == ' ')
+		i++;
 	if (--i >= 0)
 		printf_struct->res[i] = '-';
 	else
