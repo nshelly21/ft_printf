@@ -31,52 +31,62 @@ char* reader_identifier(const char *string)
 
 // handle error!!!
 
-char 	*conv_hex25(va_list ap, t_printf *printf_struct)
+void    init_t_int(t_int *int_struct)
 {
-	t_int int_struct;
+	int_struct->longlongnb = 0;
+	int_struct->longnb = 0;
+	int_struct->intnb = 0;
+	int_struct->shortnb = 0;
+}
 
-	init_t_int(&int_struct);
-	if (printf_struct->is_hh)
+void    init_t_unsint(t_unsint *unsint_struct)
+{
+	unsint_struct->longlongnb = 0;
+	unsint_struct->longnb = 0;
+	unsint_struct->intnb = 0;
+	unsint_struct->shortnb = 0;
+}
+
+char 	*conv_hex25(va_list ap, t_printf *printf_struct, t_unsint unsint_struct)
+{
+		if (printf_struct->is_hh)
 	{
-		int_struct.shortnb = (unsigned char)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 16, printf_struct));
+		unsint_struct.shortnb = (unsigned char)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.shortnb, 16, printf_struct));
 	}
 	return(NULL);
 }
 
 char 	*conv_hex(va_list ap, t_printf *printf_struct)
 {
-	t_int	int_struct;
+	t_unsint	unsint_struct;
 
-	init_t_int(&int_struct);
-	if (!(printf_struct->is_l && printf_struct->is_ll && printf_struct->is_h && printf_struct->is_hh))
-	{
-		int_struct.intnb = (unsigned int)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.intnb, 16, printf_struct));
-	}
+	init_t_unsint(&unsint_struct);
 	if (printf_struct->is_l)
 	{
-		int_struct.intnb = (unsigned long)va_arg(ap, long);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.longnb, 16, printf_struct));
+		unsint_struct.longnb = (unsigned long)va_arg(ap, long);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.longnb, 16, printf_struct));
+	}
+	if (!(printf_struct->is_l || printf_struct->is_ll || printf_struct->is_h || printf_struct->is_hh))
+	{
+		unsint_struct.intnb = (unsigned int)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.intnb, 16, printf_struct));
 	}
 	if (printf_struct->is_ll)
 	{
-		int_struct.longlongnb = (unsigned long long)va_arg(ap, long long);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.longlongnb, 16, printf_struct));
+		unsint_struct.longlongnb = (unsigned long long)va_arg(ap, long long);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.longlongnb, 16, printf_struct));
 	}
 	if (printf_struct->is_h)
 	{
-		int_struct.shortnb = (unsigned short)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 16, printf_struct));
+		unsint_struct.shortnb = (unsigned short)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.shortnb, 16, printf_struct));
 	}
-	return (conv_hex25(ap, printf_struct));
+	return (conv_hex25(ap, printf_struct, unsint_struct));
 }
 
-char	*conv_unsint25(va_list ap, t_printf *printf_struct)
+char	*conv_unsint25(va_list ap, t_printf *printf_struct, t_unsint int_struct)
 {
-	t_int int_struct;
-
-	init_t_int(&int_struct);
 	if (printf_struct->is_hh)
 	{
 		int_struct.shortnb = (unsigned char)va_arg(ap, int);
@@ -87,71 +97,68 @@ char	*conv_unsint25(va_list ap, t_printf *printf_struct)
 
 char 	*conv_unsint(va_list ap, t_printf *printf_struct)
 {
-	t_int	int_struct;
+	t_unsint	unsint_struct;
 
-	init_t_int(&int_struct);
-	if (!(printf_struct->is_l && printf_struct->is_ll && printf_struct->is_h && printf_struct->is_hh))
+	init_t_unsint(&unsint_struct);
+	if (!(printf_struct->is_l || printf_struct->is_ll || printf_struct->is_h || printf_struct->is_hh))
 	{
-		int_struct.intnb = (unsigned int)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.intnb, 10, printf_struct));
+		unsint_struct.intnb = (unsigned int)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.intnb, 10, printf_struct));
 	}
 	if (printf_struct->is_l)
 	{
-		int_struct.intnb = (unsigned long)va_arg(ap, long);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.longnb, 10, printf_struct));
+		unsint_struct.longnb = (unsigned long)va_arg(ap, long);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.longnb, 10, printf_struct));
 	}
 	if (printf_struct->is_ll)
 	{
-		int_struct.longlongnb = (unsigned long long)va_arg(ap, long long);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.longlongnb, 10, printf_struct));
+		unsint_struct.longlongnb = (unsigned long long)va_arg(ap, long long);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.longlongnb, 10, printf_struct));
 	}
 	if (printf_struct->is_h)
 	{
-		int_struct.shortnb = (unsigned short)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 10, printf_struct));
+		unsint_struct.shortnb = (unsigned short)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.shortnb, 10, printf_struct));
 	}
-	return (conv_unsint25(ap, printf_struct));
+	return (conv_unsint25(ap, printf_struct, unsint_struct));
 }
 
-char	*conv_oct25(va_list ap, t_printf *printf_struct)
+char	*conv_oct25(va_list ap, t_printf *printf_struct, t_unsint unsint_struct)
 {
-	t_int int_struct;
-
-	init_t_int(&int_struct);
 	if (printf_struct->is_hh)
 	{
-		int_struct.shortnb = (unsigned char)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 8, printf_struct));
+		unsint_struct.shortnb = (unsigned char)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.shortnb, 8, printf_struct));
 	}
 	return(NULL);
 }
 
 char	*conv_oct(va_list ap, t_printf *printf_struct)
 {
-	t_int	int_struct;
+	t_unsint	unsint_struct;
 
-	init_t_int(&int_struct);
-	if (!(printf_struct->is_l && printf_struct->is_ll && printf_struct->is_h && printf_struct->is_hh))
+	init_t_unsint(&unsint_struct);
+	if (!(printf_struct->is_l || printf_struct->is_ll || printf_struct->is_h || printf_struct->is_hh))
 	{
-		int_struct.intnb = (unsigned int)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.intnb, 8, printf_struct));
+		unsint_struct.intnb = (unsigned int)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.intnb, 8, printf_struct));
 	}
 	if (printf_struct->is_l)
 	{
-		int_struct.intnb = (unsigned long)va_arg(ap, long);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.longnb, 8, printf_struct));
+		unsint_struct.longnb = (unsigned long)va_arg(ap, long);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.longnb, 8, printf_struct));
 	}
 	if (printf_struct->is_ll)
 	{
-		int_struct.longlongnb = (unsigned long long)va_arg(ap, long long);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 8, printf_struct));
+		unsint_struct.longlongnb = (unsigned long long)va_arg(ap, long long);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.longlongnb, 8, printf_struct));
 	}
 	if (printf_struct->is_h)
 	{
-		int_struct.shortnb = (unsigned short)va_arg(ap, int);
-		return(ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 8, printf_struct));
+		unsint_struct.shortnb = (unsigned short)va_arg(ap, int);
+		return(ft_itoa_printf_u1((unsigned long long)unsint_struct.shortnb, 8, printf_struct));
 	}
-	return (conv_oct25(ap, printf_struct));
+	return (conv_oct25(ap, printf_struct, unsint_struct));
 }
 
 char	*conv_int25(va_list ap, t_printf *printf_struct)
@@ -161,6 +168,11 @@ char	*conv_int25(va_list ap, t_printf *printf_struct)
 
 	init_t_int(&int_struct);
 	res = NULL;
+	if (!(printf_struct->is_l && printf_struct->is_ll && printf_struct->is_h && printf_struct->is_hh))
+	{
+		int_struct.intnb = va_arg(ap, int);
+		return(ft_itoa_printf1((long long) int_struct.intnb, 10, printf_struct));
+	}
 	if (printf_struct->is_h == 1)
 	{
 		int_struct.shortnb = (short)va_arg(ap, int);
@@ -179,11 +191,6 @@ char    *conv_int(va_list ap, t_printf *printf_struct)
     t_int   int_struct;
 
 	init_t_int(&int_struct);
-	if (!(printf_struct->is_l && printf_struct->is_ll && printf_struct->is_h && printf_struct->is_hh))
-	{
-		int_struct.intnb = va_arg(ap, int);
-		return(ft_itoa_printf1((long long) int_struct.intnb, 10, printf_struct));
-	}
 	if (printf_struct->is_l == 1 || printf_struct->is_ll == 1)
 	{
 		int_struct.longlongnb = va_arg(ap, long long);
@@ -258,9 +265,14 @@ char    *conv_char(va_list ap, t_printf *printf_struct)
 	return (res);
 }
 
-void    conv_pointer(va_list ap)//, t_printf *printf_struct)
+void    conv_pointer(va_list ap, t_printf *printf_struct)
 {
-	ft_printf("%#lx",va_arg(ap, int));
+	void		*str;
+	long long	k;
+
+	str = va_arg(ap, void*);
+	k = (long long)str;
+	printf_struct->res = ft_itoa_printf1(k, 16, printf_struct);
 }
 
 char 	*put_char_first(char *str, char c)
@@ -368,6 +380,20 @@ void 	conv_float(va_list ap, t_printf *ps)
 	float_handler(nb, ps);
 }
 
+char	*capitalize(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			str[i] = str[i] - 32;
+		i++;
+	}
+	return (str);
+}
+
 void 	conv_percent( t_printf *printf_struct)
 {
 	if (!(printf_struct->res = malloc(sizeof(char) * 2)))
@@ -383,17 +409,21 @@ void     conv_handler(va_list ap, t_printf *printf_struct)
 	if (printf_struct->conversion == 'c' || printf_struct->error_conv != -42)
 		printf_struct->res = conv_char(ap, printf_struct);
 	if (printf_struct->conversion == 'p')
-		conv_pointer(ap);
+		conv_pointer(ap, printf_struct);
 	if (printf_struct->conversion == 'd' || printf_struct->conversion == 'i')
         printf_struct->res = conv_int(ap, printf_struct);
     if (printf_struct->conversion == 'o')
 		printf_struct->res = conv_oct(ap, printf_struct);
     if (printf_struct->conversion == 'u')
         printf_struct->res = conv_unsint(ap, printf_struct);
-    if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X')
+    if (printf_struct->conversion == 'x')
 		printf_struct->res = conv_hex(ap, printf_struct);
-    if (printf_struct->conversion == 'f' || printf_struct->conversion == 'F')
+    if (printf_struct->conversion == 'X')
+    	printf_struct->res = capitalize(conv_hex(ap, printf_struct));
+    if (printf_struct->conversion == 'f')
         conv_float(ap, printf_struct);
+    if (printf_struct->conversion == 'F')
+		printf_struct->res = capitalize(conv_hex(ap, printf_struct));
     if (printf_struct->conversion == '%')
     {
 	    conv_percent(printf_struct);
@@ -406,7 +436,7 @@ void     conv_handler(va_list ap, t_printf *printf_struct)
 
 int 	init_flags(const char *str, int i, t_printf *printf_struct)
 {
-	while (str[i] == '#' || str[i] == '0' || str[i] == '-' || str[i] == '+')
+	while (str[i] == '#' || str[i] == '0' || str[i] == '-' || str[i] == '+' || str[i] == ' ')
 	{
 		if (str[i] == '#')
 			printf_struct->is_hash = 1;
@@ -416,6 +446,8 @@ int 	init_flags(const char *str, int i, t_printf *printf_struct)
 			printf_struct->is_minus = 1;
 		if (str[i] == '+')
 			printf_struct->is_plus = 1;
+		if (str[i] == ' ')
+			printf_struct->is_space = 1;
 		i++;
 	}
 	return (i);
@@ -469,15 +501,15 @@ int		init_accuracy(const char *input_str, int i, t_printf *printf_struct)
 
 int		init_length(const char *input_str, int i, t_printf *printf_struct)
 {
-	if (input_str[i] == 'h')
+	if (input_str[i] == 'h' && input_str[i + 1] != 'h')
 		printf_struct->is_h = 1;
 	if (input_str[i] == 'h' && input_str[i + 1] == 'h')
 		printf_struct->is_hh = 1;
-	if (input_str[i] == 'l')
+	if (input_str[i] == 'l' && input_str[i + 1] != 'l')
 		printf_struct->is_l = 1;
 	if (input_str[i] == 'l' && input_str[i + 1] == 'l')
 		printf_struct->is_ll = 1;
-	return (i + (printf_struct->is_hh == 1 ? 2 : 0) + (printf_struct->is_ll == 1 ? 2 : 0) + printf_struct->is_l + printf_struct->is_h);
+	return (i + (printf_struct->is_hh ? 2 : 0) + (printf_struct->is_ll == 1 ? 2 : 0) + printf_struct->is_l + printf_struct->is_h);
 }
 
 int		parse_flags(const char *input_str, int i, t_printf *printf_struct)
@@ -494,8 +526,10 @@ int		parse_flags(const char *input_str, int i, t_printf *printf_struct)
 		else
 			printf_struct->accuracy = 0;
 	}
+	else
+		printf_struct->accuracy = 0;
 	if (is_length(input_str, i))
-		i = i + init_length(input_str, i, printf_struct); //TODO CHECK PLEASE
+		i = init_length(input_str, i, printf_struct); //TODO CHECK PLEASE
 	if (is_conv(input_str, i))
 		printf_struct->conversion = input_str[i];
 	else
@@ -568,40 +602,71 @@ void 	hash_float_handler(char *str, t_printf *printf_struct)
 
 void 	hash_oct_handler(char *str, t_printf *printf_struct)
 {
-	/*int i;
+	int i;
 
 	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (--i >= 0)
 		str[i] = '0';
-	else*/
-	str = put_char_first(printf_struct->res, '0');
-	printf_struct->res = str;
+	else
+		printf_struct->res = put_char_first(printf_struct->res, '0');
 }
 
-char	*hash_hex_handler25(char *str, char *res)
+void	hash_hex_handler25(char *hex, int j, t_printf *printf_struct)
 {
-	if  (str[0] == '0' && str[1] == '0')
-		str[1] = res[1];
-	else if (str[0] == '0' && str[1] != '0')
+	if  (printf_struct->res[0] == '0' && printf_struct->res[1] == '0' && j == 1)
+		printf_struct->res[1] = hex[1];
+	else if (printf_struct->res[0] == '0' && printf_struct->res[1] != '0' && j == 1)
 	{
-		str[0] = res[1];
-		str = put_char_first(str, res[0]);
+		printf_struct->res[0] = hex[1];
+		printf_struct->res = put_char_first(printf_struct->res, hex[0]);
 	}
-	else if (str[0] != '0' && str[1] != res[1])
-		str = put_char_first(str, res[1]);
-	return (str);
+	else if (printf_struct->res[0] != '0' && printf_struct->res[1] != hex[1])
+		printf_struct->res = put_char_first(printf_struct->res, hex[j]);
 }
 
-void 	hash_hex_handler(char *str, t_printf *printf_struct)
+void 	hash_hex_handler(t_printf *printf_struct)
+{
+	int		i;
+	int 	j;
+	char 	*hex;
+
+	i = 0;
+	j = 2;
+	hex = printf_struct->conversion == 'X' ? "0X" : "0x";
+	while (printf_struct->res[i] == ' ')
+			i++;
+	while (--j >= 0)
+	{
+		if (--i >= 0)
+		{
+			if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X'
+			|| printf_struct->conversion == 'p')
+				printf_struct->res[i] = hex[j];
+		}
+		else
+		{
+			if (printf_struct->size > printf_struct->accuracy)
+				hash_hex_handler25(hex, j, printf_struct);
+			else if (printf_struct->size <= printf_struct->accuracy)
+			{
+				printf_struct->res = put_char_first(printf_struct->res, hex[1]);
+				printf_struct->res = put_char_first(printf_struct->res, hex[0]);
+				break ;
+			}
+		}
+	}
+}
+
+/*void 	hash_hex_handler(char *str, t_printf *printf_struct)
 {
 	//int		i;
 	char	res;
 
 	//i = 0;
 	res = printf_struct->conversion == 'x' ? 'x' : 'X';
-	/*while (str[i] == ' ')
+	*//*while (str[i] == ' ')
 		i++;
 	if (--i > -1)
 	{
@@ -617,11 +682,11 @@ void 	hash_hex_handler(char *str, t_printf *printf_struct)
 			str = put_char_first(str, res[1]);
 			str = put_char_first(str, res[0]);
 		}
-	}*/
+	}*//*
 	str = put_char_first(printf_struct->res, res);
 	str = put_char_first(str, '0');
 	printf_struct->res = str;
-}
+}*/
 
 //TODO подозрительно просто блядь. Посмотреть внимательнее.
 void 	plus_handler25(t_printf *printf_struct)
@@ -717,9 +782,7 @@ void 	space_handler25(t_printf *printf_struct)
 
 void 	space_handler(t_printf *printf_struct)
 {
-	if (!printf_struct->accuracy || !printf_struct->size)
-		printf_struct->res = put_char_first(printf_struct->res, ' ');
-	if (printf_struct->accuracy || printf_struct->size)
+	if (printf_struct->accuracy && printf_struct->size)
 	{
 		if (printf_struct->accuracy > printf_struct->size)
 		{
@@ -738,6 +801,8 @@ void 	space_handler(t_printf *printf_struct)
 	else if (printf_struct->size)
 		space_handler25(printf_struct);
 	else if (printf_struct->accuracy)
+		printf_struct->res = put_char_first(printf_struct->res, ' ');
+	else if (!printf_struct->accuracy || !printf_struct->size)
 		printf_struct->res = put_char_first(printf_struct->res, ' ');
 }
 
@@ -814,7 +879,7 @@ void 	flags_handler(const char *str, t_printf *ps)
 			space_handler(ps);
 		if ((ps->conversion == 'x' || ps->conversion == 'X' || ps->conversion == 'p') &&
 		ps->is_hash)// && ps->zero_arg) && !(ps->conversion == 'x' || ps->conversion == 'X'))
-			hash_hex_handler((char*)str, ps);
+			hash_hex_handler(ps);
 		if (ps->conversion == 'o' && !ps->accuracy && ps->is_hash)
 			hash_oct_handler((char*)str, ps);
 		if (ps->is_neg)
@@ -857,14 +922,6 @@ void	init_t_printf1(t_printf *printf_struct)
 	printf_struct->ret_value = 0;
 	printf_struct->size = 0;
 	init_t_printf2(printf_struct);
-}
-
-void    init_t_int(t_int *int_struct)
-{
-	int_struct->longlongnb = 0;
-	int_struct->longnb = 0;
-	int_struct->intnb = 0;
-	int_struct->shortnb = 0;
 }
 
 void init(t_printf *printf_struct, t_int *int_struct)
@@ -982,7 +1039,7 @@ int		ft_printf(const char *input_str, ...)
 			conv_handler(ap, &printf_struct);
 			fix_flag_errors(&printf_struct);
 			accuracy_and_size_handler(&printf_struct);
-			flags_handler(input_str, &printf_struct);
+			flags_handler(printf_struct.res, &printf_struct);
 			printf_struct.ret_value += ft_putstr(printf_struct.res);
 			init_t_printf2(&printf_struct);
 			if (printf_struct.conversion == 'c' && printf_struct.zero_arg)

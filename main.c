@@ -65,8 +65,10 @@ int main(void)
 	ft_printf("%-10s\n", nickname1);*/
 	//TODO check hh h ll l with printf tests
 
+	long long int llmax = 9223372036854775807;
 	//ft_printf("%%");
-	ft_printf("%+8.5i", 34);
+	//ft_printf("this % i number", 17);
+	ft_printf("%p", NULL);
 	/*ft_putchar('\n');
 	printf("%%");
 	ft_putchar('\n');

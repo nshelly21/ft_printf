@@ -45,6 +45,14 @@ typedef struct s_int
     short       shortnb;
 }               t_int;
 
+typedef struct	s_unsint
+{
+	unsigned long long   longlongnb;
+	unsigned long        longnb;
+	unsigned int         intnb;
+	unsigned short       shortnb;
+}				t_unsint;
+
 int		ft_printf(const char *input_str, ...);
 void	init(t_printf *printf_struct, t_int *int_struct);
 void    init_t_int(t_int *int_struct);
