@@ -46,6 +46,8 @@ char	*conv_string(va_list ap, t_printf *ps)
 
 	i = -1;
 	str = va_arg(ap, typeof(str));
+	if (str == NULL)
+		str = "(null)";
 	if (!str && !ps->is_point)
 		return (ft_strdup("(null)"));
 	if (!ps->accuracy && ps->is_point)
