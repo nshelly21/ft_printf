@@ -32,7 +32,7 @@ char	*str_acc(char *str, t_printf *ps, int i)
 			ps->error = 1;
 			return (0);
 		}
-		while (++i < ps->accuracy)
+		while (++i < ps->accuracy && str)
 			res[i] = str[i];
 		res[i] = '\0';
 	}
