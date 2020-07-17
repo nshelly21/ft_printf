@@ -46,6 +46,7 @@ static char	*conv_hex_continue(va_list ap, t_printf *printf_struct,\
 		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->\
 					shortnb, 16, printf_struct));
 	}
+	return (0);
 }
 
 char		*conv_hex(va_list ap, t_printf *printf_struct)

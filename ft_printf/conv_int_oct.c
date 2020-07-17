@@ -44,6 +44,7 @@ char	*conv_oct_continue(va_list ap, t_printf *printf_struct,\
 		return (ft_itoa_printf_u1((unsigned long long)us->shortnb, \
 					8, printf_struct));
 	}
+	return (NULL);
 }
 
 char	*conv_oct(va_list ap, t_printf *printf_struct)

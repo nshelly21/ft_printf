@@ -45,6 +45,7 @@ static char	*conv_unsint_continue(va_list ap, t_printf *printf_struct, \
 		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->shortnb, \
 					10, printf_struct));
 	}
+	return (NULL);
 }
 
 char		*conv_unsint(va_list ap, t_printf *printf_struct)
