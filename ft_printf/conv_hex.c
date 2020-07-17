@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 char		*conv_hex25(va_list ap, t_printf *printf_struct, \
 		t_unsint unsint_struct)
@@ -20,7 +20,7 @@ char		*conv_hex25(va_list ap, t_printf *printf_struct, \
 		unsint_struct.shortnb = (unsigned char)va_arg(ap, int);
 		return (ft_itoa_printf_u1((unsigned long long)unsint_struct.\
 					shortnb, 16, printf_struct));
-	}:i
+	}
 	return (NULL);
 }
 

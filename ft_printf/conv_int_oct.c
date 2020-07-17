@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 char	*conv_oct25(va_list ap, t_printf *printf_struct, t_unsint unsint_struct)
 {
@@ -24,24 +24,24 @@ char	*conv_oct25(va_list ap, t_printf *printf_struct, t_unsint unsint_struct)
 }
 
 char	*conv_oct_continue(va_list ap, t_printf *printf_struct,\
-		t_unsint *unsint_struct)
+		t_unsint *us)
 {
 	if (printf_struct->is_l)
 	{
-		unsint_struct->longnb = (unsigned long)va_arg(ap, long);
-		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->longnb, 8,\
+		us->longnb = (unsigned long)va_arg(ap, long);
+		return (ft_itoa_printf_u1((unsigned long long)us->longnb, 8,\
 					printf_struct));
 	}
 	if (printf_struct->is_ll)
 	{
-		unsint_struct->longlongnb = (unsigned long long)va_arg(ap, long long);
-		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->longlongnb,\
+		us->longlongnb = (unsigned long long)va_arg(ap, long long);
+		return (ft_itoa_printf_u1((unsigned long long)us->longlongnb,\
 					8, printf_struct));
 	}
 	if (printf_struct->is_h)
 	{
-		unsint_struct->shortnb = (unsigned short)va_arg(ap, int);
-		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->shortnb, \
+		us->shortnb = (unsigned short)va_arg(ap, int);
+		return (ft_itoa_printf_u1((unsigned long long)us->shortnb, \
 					8, printf_struct));
 	}
 }

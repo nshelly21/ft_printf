@@ -5,7 +5,7 @@
 #ifndef FT_PRINTF_FT_PRINTF_H
 # define FT_PRINTF_FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>// for write function
 # include <stdlib.h> //for malloc, free and exit functions
@@ -14,7 +14,7 @@
 
 typedef struct	s_printf
 {
-	char 		conversion;
+	char 		conv;
 	char 		*res;
 	int 		res_len;
 	int         is_neg;
@@ -63,7 +63,7 @@ void 	conv_handler(va_list ap, t_printf *printf_struct);
 */
 
 char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct);
-char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_struct);
+char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *ps);
 int 	where_start(t_printf *printf_struct);
 
 /*
@@ -80,19 +80,19 @@ void    init_t_int(t_int *int_struct);
  */
 void    init_t_unsint(t_unsint *unsint_struct);
 int		init_accuracy(const char *input_str, int i, t_printf *printf_struct);
-int		init_length(const char *input_str, int i, t_printf *printf_struct);
+int		init_length(const char *input_str, int i, t_printf *ps);
 
 /*
 *---------------------conversions_string_char.c-------------------------
  */
-char    *conv_string(va_list ap, t_printf *printf_struct);
-char    *conv_char(va_list ap, t_printf *printf_struct);
+char    *conv_string(va_list ap, t_printf *ps);
+char    *conv_char(va_list ap, t_printf *ps);
 
 /*
 *---------------------space_handler.c-------------------------
  */
 void 	space_handler25(t_printf *printf_struct);
-void 	space_handler(t_printf *printf_struct);
+void 	space_handler(t_printf *ps);
 
 /*
 *---------------------conv_usint_hex.c-------------------------
@@ -124,7 +124,7 @@ int 	is_length(const char *str, int i);
 /*
 *---------------------round.c-------------------------
 */
-void 	round1(t_printf *printf_struct);
+void 	round1(t_printf *ps);
 void 	round2(t_printf *printf_struct);
 
 /*
@@ -136,29 +136,29 @@ void     conv_handler(va_list ap, t_printf *printf_struct);
 *---------------------handler_float_hex_oct.c-------------------------
 */
 void 	hash_float_handler(char *str, t_printf *printf_struct);
-void	float_handler(long double nb, t_printf *printf_struct);
+void	float_handler(long double nb, t_printf *ps);
 void 	hash_oct_handler(char *str, t_printf *printf_struct);
-void	hash_hex_handler25(char *hex, int j, t_printf *printf_struct);
-void 	hash_hex_handler(t_printf *printf_struct);
+void	hash_hex_handler25(char *hex, int j, t_printf *ps);
+void 	hash_hex_handler(t_printf *ps);
 
 /*
 *---------------------handler_accuraycy_size.c-------------------------
 */
 void 	accuracy_handler(t_printf *printf_struct);
 void 	size_handler(t_printf *printf_struct);
-void	accuracy_and_size_handler(t_printf *printf_struct);
+void	accuracy_and_size_handler(t_printf *ps);
 
 /*
 *---------------------fix.c-------------------------
 */
-void	fix_flag_errors(t_printf *ps);
+void	fix_flag_errors1(t_printf *ps);
 
 /*
 *---------------------handler_plus_zero_minus.c-------------------------
 */
 
 void 	plus_handler25(t_printf *printf_struct);
-void 	plus_handler(t_printf *printf_struct);
+void 	plus_handler(t_printf *ps);
 void 	zero_handler(t_printf *printf_struct);
 void 	minus_handler(t_printf *ps);
 
@@ -178,7 +178,7 @@ int		parse_flags(const char *input_str, int i, t_printf *printf_struct);
 /*
 *---------------------handler_infcase_negnb.c-------------------------
 */
-void 	negnb_handler(t_printf *printf_struct);
+void 	negnb_handler(t_printf *ps);
 void 	inf_case_handler(t_printf *ps);
 int 	count_dig(int nb);
 

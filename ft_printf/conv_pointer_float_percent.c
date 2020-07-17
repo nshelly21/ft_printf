@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 void	conv_pointer(va_list ap, t_printf *printf_struct)
 {
@@ -40,7 +40,7 @@ void	conv_float(va_list ap, t_printf *ps)
 	if ((1.0 / 0.0) == nb)
 	{
 		ps->is_inf = 1;
-		ps->res = (ps->conversion == 'f' ? "inf" : "INF");
+		ps->res = (ps->conv == 'f' ? "inf" : "INF");
 		return ;
 	}
 	if (nb < 0)
