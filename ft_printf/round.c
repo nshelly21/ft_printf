@@ -6,7 +6,7 @@
 /*   By: nshelly <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 14:37:06 by nshelly           #+#    #+#             */
-/*   Updated: 2020/07/17 14:44:45 by nshelly          ###   ########.fr       */
+/*   Updated: 2020/07/17 20:24:31 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ void	round2(t_printf *printf_struct)
 		printf_struct->res[i] = '\0';
 }
 
+int		round25(t_printf *ps, int i, int nb)
+{
+	if (ps->res[i] < '9' && ps->res[i] != '.')
+	{
+		ps->res[i] += 1;
+		nb = 0;
+	}
+	else if (ps->res[i] == '9')
+		ps->res[i] = '0';
+	if (ps->res[0] == '0')
+	{
+		ps->res = put_char_first(ps->res, '1');
+		nb = 0;
+	}
+	return (nb);
+}
+
 void	round1(t_printf *ps)
 {
 	int	i;
@@ -41,18 +58,7 @@ void	round1(t_printf *ps)
 		nb = 1;
 	while (nb)
 	{
-		if (ps->res[i] < '9' && ps->res[i] != '.')
-		{
-			ps->res[i] += 1;
-			nb = 0;
-		}
-		else if (ps->res[i] == '9')
-			ps->res[i] = '0';
-		if (ps->res[0] == '0')
-		{
-			ps->res = put_char_first(ps->res, '1');
-			nb = 0;
-		}
+		nb = round25(ps, i, nb);
 		i--;
 	}
 	round2(ps);
