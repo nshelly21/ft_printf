@@ -6,11 +6,11 @@
 /*   By: nshelly <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 14:37:06 by nshelly           #+#    #+#             */
-/*   Updated: 2020/07/17 20:24:31 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 14:44:45 by nshelly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 void	round2(t_printf *printf_struct)
 {
@@ -28,38 +28,32 @@ void	round2(t_printf *printf_struct)
 		printf_struct->res[i] = '\0';
 }
 
-int		round25(t_printf *ps, int i, int nb)
-{
-	if (ps->res[i] < '9' && ps->res[i] != '.')
-	{
-		ps->res[i] += 1;
-		nb = 0;
-	}
-	else if (ps->res[i] == '9')
-		ps->res[i] = '0';
-	if (ps->res[0] == '0')
-	{
-		ps->res = put_char_first(ps->res, '1');
-		nb = 0;
-	}
-	return (nb);
-}
-
-void	round1(t_printf *ps)
+void	round1(t_printf *printf_struct)
 {
 	int	i;
 	int	nb;
 
 	i = 0;
 	nb = 0;
-	while (ps->res[i + 1])
+	while (printf_struct->res[i + 1])
 		i++;
-	if (ps->res[i--] >= '5')
+	if (printf_struct->res[i--] >= '5')
 		nb = 1;
 	while (nb)
 	{
-		nb = round25(ps, i, nb);
+		if (printf_struct->res[i] < '9' && printf_struct->res[i] != '.')
+		{
+			printf_struct->res[i] += 1;
+			nb = 0;
+		}
+		else if (printf_struct->res[i] == '9')
+			printf_struct->res[i] = '0';
+		if (printf_struct->res[0] == '0')
+		{
+			printf_struct->res = put_char_first(printf_struct->res, '1');
+			nb = 0;
+		}
 		i--;
 	}
-	round2(ps);
+	round2(printf_struct);
 }

@@ -1,108 +1,95 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handler_float_hex_oct.c                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/17 19:24:07 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 20:28:34 by dgruyere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "includes/ft_printf.h"
 
-#include "../includes/ft_printf.h"
 
-void	hash_float_handler(char *str, t_printf *printf_struct)
+void 	hash_float_handler(char *str, t_printf *printf_struct)
 {
-	int i;
+    int i;
 
-	i = 0;
-	while (str[i] && str[i] != '.')
-		i++;
-	if (str[i] != '.')
-		str[i] = '.';
-	printf_struct->res = str;
+    i = 0;
+    while (str[i] && str[i] != '.')
+        i++;
+    if (str[i] != '.')
+        str[i] = '.';
+    printf_struct->res = str;
 }
 
-void	float_handler(long double nb, t_printf *ps)
+void	float_handler(long double nb, t_printf *printf_struct)
 {
-	int		i;
-	char	*dot;
-	char	*tmp;
+    int		i;
+    char	*dot;
+    char 	*tmp;
 
-	i = 0;
-	ps->res = ft_itoa_printf_u1((unsigned long long)nb, 10, ps);
-	dot = ft_strnew(0);
-	while (++i <= ps->accuracy + 1)
-	{
-		nb = nb - (unsigned long long)nb;
-		nb = nb * 10;
-		tmp = ft_itoa_printf_u1((unsigned long long)nb, 10, ps);
-		dot = ft_strjoin(dot, tmp);
-	}
-	dot = put_char_first(dot, '.');
-	ps->res = ft_strjoin(ps->res, dot);
-	round1(ps);
+    i = 0;
+    printf_struct->res = ft_itoa_printf_u1((unsigned long long)nb, 10, printf_struct);
+    dot = ft_strnew(0);
+    while (++i <= printf_struct->accuracy + 1)
+    {
+        nb = nb - (unsigned long long)nb;
+        nb = nb * 10;
+        tmp = ft_itoa_printf_u1((unsigned long long)nb, 10, printf_struct);
+        dot = ft_strjoin(dot, tmp);
+    }
+    dot = put_char_first(dot, '.');
+    printf_struct->res = ft_strjoin(printf_struct->res, dot);
+    round1(printf_struct);
 }
 
-void	hash_oct_handler(char *str, t_printf *printf_struct)
+void 	hash_oct_handler(char *str, t_printf *printf_struct)
 {
-	int i;
+    int i;
 
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	if (--i >= 0)
-		str[i] = '0';
-	else
-		printf_struct->res = put_char_first(printf_struct->res, '0');
+    i = 0;
+    while (str[i] == ' ')
+        i++;
+    if (--i >= 0)
+        str[i] = '0';
+    else
+        printf_struct->res = put_char_first(printf_struct->res, '0');
 }
 
-int		hash_hex_handler2525(char *hex, int j, t_printf *ps)
+void	hash_hex_handler25(char *hex, int j, t_printf *printf_struct)
 {
-	if (ps->size > ps->accuracy)
-	{
-		if (ps->res[0] == '0' && ps->res[1] == '0' && j == 1)
-			ps->res[1] = hex[1];
-		else if (ps->res[0] == '0' && ps->res[1] != '0' && j == 1)
-		{
-			ps->res[0] = hex[1];
-			ps->res = put_char_first(ps->res, hex[0]);
-		}
-		else if (ps->res[0] != '0' && ps->res[1] != hex[1])
-			ps->res = put_char_first(ps->res, hex[j]);
-	}
-	else if (ps->size <= ps->accuracy)
-	{
-		ps->res = put_char_first(ps->res, hex[1]);
-		ps->res = put_char_first(ps->res, hex[0]);
-		return (1);
-	}
-	return (0);
+    if  (printf_struct->res[0] == '0' && printf_struct->res[1] == '0' && j == 1)
+        printf_struct->res[1] = hex[1];
+    else if (printf_struct->res[0] == '0' && printf_struct->res[1] != '0' && j == 1)
+    {
+        printf_struct->res[0] = hex[1];
+        printf_struct->res = put_char_first(printf_struct->res, hex[0]);
+    }
+    else if (printf_struct->res[0] != '0' && printf_struct->res[1] != hex[1])
+        printf_struct->res = put_char_first(printf_struct->res, hex[j]);
 }
 
-void	hash_hex_handler(t_printf *ps)
+void 	hash_hex_handler(t_printf *printf_struct)
 {
-	int		i;
-	int		j;
-	char	*hex;
+    int		i;
+    int 	j;
+    char 	*hex;
 
-	i = 0;
-	j = 2;
-	hex = ps->conv == 'X' ? "0X" : "0x";
-	while (ps->res[i] == ' ')
-		i++;
-	while (--j >= 0)
-	{
-		if (--i >= 0)
-		{
-			if (ps->conv == 'x' || ps->conv == 'X' || ps->conv == 'p')
-				ps->res[i] = hex[j];
-		}
-		else
-		{
-			if (hash_hex_handler2525(hex, j, ps))
-				break ;
-		}
-	}
+    i = 0;
+    j = 2;
+    hex = printf_struct->conversion == 'X' ? "0X" : "0x";
+    while (printf_struct->res[i] == ' ')
+        i++;
+    while (--j >= 0)
+    {
+        if (--i >= 0)
+        {
+            if (printf_struct->conversion == 'x' || printf_struct->conversion == 'X'
+                || printf_struct->conversion == 'p')
+                printf_struct->res[i] = hex[j];
+        }
+        else
+        {
+            if (printf_struct->size > printf_struct->accuracy)
+                hash_hex_handler25(hex, j, printf_struct);
+            else if (printf_struct->size <= printf_struct->accuracy)
+            {
+                printf_struct->res = put_char_first(printf_struct->res, hex[1]);
+                printf_struct->res = put_char_first(printf_struct->res, hex[0]);
+                break ;
+            }
+        }
+    }
 }
+

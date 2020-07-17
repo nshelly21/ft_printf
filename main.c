@@ -2,7 +2,7 @@
 // Created by Denisse Gruyere on 7/13/20.
 //
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 int main(void)
 {

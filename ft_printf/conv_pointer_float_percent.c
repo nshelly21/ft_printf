@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 void	conv_pointer(va_list ap, t_printf *printf_struct)
 {
@@ -25,7 +25,7 @@ void	conv_pointer(va_list ap, t_printf *printf_struct)
 void	conv_percent(t_printf *printf_struct)
 {
 	if (!(printf_struct->res = malloc(sizeof(char) * 2)))
-		return (exit_error(printf_struct));
+		return ;
 	printf_struct->res[0] = '%';
 	printf_struct->res[1] = '\0';
 }
@@ -40,7 +40,7 @@ void	conv_float(va_list ap, t_printf *ps)
 	if ((1.0 / 0.0) == nb)
 	{
 		ps->is_inf = 1;
-		ps->res = (ps->conv == 'f' ? "inf" : "INF");
+		ps->res = (ps->conversion == 'f' ? "inf" : "INF");
 		return ;
 	}
 	if (nb < 0)

@@ -1,78 +1,53 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   conversions_string_char.c                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/17 19:23:06 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 20:10:13 by dgruyere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "includes/ft_printf.h"
 
-#include "../includes/ft_printf.h"
-
-char	*str_acc(char *str, t_printf *ps, int i)
+char    *conv_string(va_list ap, t_printf *printf_struct)
 {
-	char	*res;
+    char	*identified_string;
+    char	*res;
+    int 	i;
 
-	if (!ps->accuracy)
-	{
-		if (!(res = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1))))
-		{
-			ps->error = 1;
-			return (0);
-		}
-		res = ft_strcpy(res, str);
-	}
-	else
-	{
-		if (!(res = (char*)malloc(sizeof(char) * (ps->accuracy + 1))))
-		{
-			ps->error = 1;
-			return (0);
-		}
-		while (++i < ps->accuracy)
-			res[i] = str[i];
-		res[i] = '\0';
-	}
-	return (res);
+    i = -1;
+    identified_string = va_arg(ap, typeof(identified_string));
+    if (!identified_string && !printf_struct->is_point)
+        return (ft_strdup("(null)"));
+    if (!printf_struct->accuracy && printf_struct->is_point)
+        return (ft_strnew(0));
+    if (!printf_struct->accuracy)
+    {
+        if (!(res = (char *) malloc(sizeof(char) * (ft_strlen(identified_string) + 1))))
+            return (0); //TODO write proper exit_error function
+        res = ft_strcpy(res, identified_string);
+    }
+    else
+    {
+        if (!(res = (char *) malloc(sizeof(char) * (printf_struct->accuracy + 1))))
+            return (0);
+        while (++i < printf_struct->accuracy)
+            res[i] = identified_string[i];
+        res[i] = '\0';
+    }
+    return (res);
 }
 
-char	*conv_string(va_list ap, t_printf *ps)
+char    *conv_char(va_list ap, t_printf *printf_struct)
 {
-	char	*str;
-	int		i;
+    char identified_char;
+    char *res;
 
-	i = -1;
-	str = va_arg(ap, typeof(str));
-	if (!str && !ps->is_point)
-		return (ft_strdup("(null)"));
-	if (!ps->accuracy && ps->is_point)
-		return (ft_strnew(0));
-	return (str_acc(str, ps, i));
-}
-
-void	conv_char(va_list ap, t_printf *ps)
-{
-	char identified_char;
-	char *res;
-
-	if (ps->error_conv == -42)
-		identified_char = va_arg(ap, int);
-	else
-		identified_char = ps->error_conv;
-	if (identified_char == 0)
-	{
-		ps->zero_arg = 1;
-		if (ps->error_conv == -42)
-			ps->ret_value += 1;
-		ps->res = 0;
-		return ;
-	}
-	if (!(res = (char*)malloc(sizeof(char) * 2)))
-		return (exit_error(ps));
-	res[0] = identified_char;
-	res[1] = '\0';
-	ps->res = res;
+    if (printf_struct->error_conv == -42)
+        identified_char = va_arg(ap, int);
+    else
+    identified_char = printf_struct->error_conv;
+    if (identified_char == 0)
+    {
+        printf_struct->zero_arg = 1;
+        if (printf_struct->error_conv == -42)
+            printf_struct->ret_value += 1;
+        return (ft_strnew(0));
+    }
+    if (!(res = (char*)malloc(sizeof(char) * 2)))
+        return (0); //TODO write proper exit_error function
+    res[0] = identified_char;
+    res[1] = '\0';
+    return (res);
 }
