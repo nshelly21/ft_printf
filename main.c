@@ -70,6 +70,9 @@ int main(void)
 	//ft_printf("this % i number", 17);
 	ft_printf("%.03s", "hi men");
 	ft_printf("\n");
+	printf("%.03s", "hi men");
+	ft_printf("\n");
+	printf("%3.1s", NULL);
 	/*ft_putchar('\n');
 	printf("%%");
 	ft_putchar('\n');

@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:24:29 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 19:25:37 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 23:31:30 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	flags_handler(const char *str, t_printf *ps)
 			plus_handler(ps);
 		if (ps->is_space && !ps->is_nan)
 			space_handler(ps);
-		if ((ps->conv == 'x' || ps->conv == 'X' || ps->conv == 'p') &&
-			ps->is_hash && ps->zero_arg &&
-			!(ps->conv == 'x' || ps->conv == 'X'))
+		if (ps->is_hash == 1 && (ps->conv == 'x' ||
+			ps->conv == 'X' || ps->conv == 'p') &&
+			!((ps->conv == 'x' || ps->conv == 'X') && ps->zero_arg == 1))
 			hash_hex_handler(ps);
 		if (ps->conv == 'o' && !ps->accuracy && ps->is_hash)
 			hash_oct_handler((char*)str, ps);
@@ -48,10 +48,11 @@ int		parse_flags(const char *input_str, int i, t_printf *printf_struct)
 	if (input_str[i] == '.')
 	{
 		printf_struct->is_point = 1;
-		if (input_str[++i] >= '0' && input_str[i] <= '9')
-			i = i + init_accuracy(input_str, i, printf_struct);
-		else
-			printf_struct->accuracy = 0;
+		while (!is_conv(input_str, i) || !input_str[i])
+			if (input_str[++i] >= '0' && input_str[i] <= '9')
+				i = i + init_accuracy(input_str, i, printf_struct);
+			else if (!is_conv(input_str, i))
+				printf_struct->accuracy = 0;
 	}
 	else
 		printf_struct->accuracy = 0;
