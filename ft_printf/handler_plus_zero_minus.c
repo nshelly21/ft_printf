@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:24:41 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 19:24:43 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 20:19:46 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,25 @@ void	zero_handler(t_printf *printf_struct)
 	}
 }
 
+int		minus_handler25(t_printf *ps, int i)
+{
+	if (ps->conv == 's')
+	{
+		while ((unsigned long)i < ft_strlen(ps->res) -
+		(ps->is_space + ps->res_len))
+			i++;
+	}
+	else
+	{
+		while (i < (int)ft_strlen(ps->res) - ((ps->is_space || ps->is_plus) +
+		(ps->res_len + ps->is_nan + ps->is_inf <
+			ps->accuracy ? ps->accuracy :
+			ps->res_len)) && ps->res[i] == ' ')
+			i++;
+	}
+	return (i);
+}
+
 void	minus_handler(t_printf *ps)
 {
 	int		i;
@@ -80,17 +99,7 @@ void	minus_handler(t_printf *ps)
 	j = 0;
 	if (!(res = malloc(sizeof(char) * (ft_strlen(ps->res) + 1))))
 		return ;
-	if (ps->conv == 's')
-	{
-		while ((unsigned long)i < ft_strlen(ps->res) - (ps->is_space + ps->res_len))
-			i++;
-	}
-	else
-	{
-		while (i < (int)ft_strlen(ps->res) - ((ps->is_space || ps->is_plus) + (ps->res_len +
-		ps->is_nan + ps->is_inf < ps->accuracy ? ps->accuracy : ps->res_len)) && ps->res[i] == ' ')
-			i++;
-	}
+	i = minus_handler25(ps, i);
 	while (ps->res[i])
 		res[j++] = ps->res[i++];
 	while (i > j)
