@@ -67,7 +67,7 @@ void	conv_char(va_list ap, t_printf *ps)
 		ps->zero_arg = 1;
 		if (ps->error_conv == -42)
 			ps->ret_value += 1;
-		ps->res = 0;
+		ps->res = ft_strnew(0);
 		return ;
 	}
 	if (!(res = (char*)malloc(sizeof(char) * 2)))

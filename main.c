@@ -13,15 +13,15 @@ int main(void)
 	nickname2 = "dgruyere";
 
 
-	ft_printf("hello my nickname is %s %s %s\n", nickname1, nickname2, nickname1);
+	/*ft_printf("hello my nickname is %s %s %s\n", nickname1, nickname2, nickname1);
 	ft_printf("hello! The bomb is ticking down, %s: %d, %d, %d\n", nickname2, 3, 2, 1);
 	ft_printf("%s, %d in octal form is %o, in hexadecimal %x\n", nickname1, 100, 100, 100);
-	ft_printf("hello my another nickname is %-20s .\n", "10");
+	ft_printf("hello my another nickname is %-20s .\n", "10");*/
 
 	//simple TESTS FROM https://alvinalexander.com/programming/printf-format-cheat-sheet/
 	//integer formatting
 
-	ft_printf("hello%#o\n", 10);
+	/*ft_printf("hello%#o\n", 10);
 	ft_printf("hello %#lx\n", "hello");
 	printf("hello %p\n", "hello");
 	printf("hello %#lx\n", "hello");
@@ -62,13 +62,13 @@ int main(void)
 	ft_printf("%-10s\n", "Hello");						//'Hello     '
 	ft_printf("%s\n", nickname1);
 	ft_printf("%10s\n", nickname2);
-	ft_printf("%-10s\n", nickname1);
+	ft_printf("%-10s\n", nickname1);*/
 	//TODO check hh h ll l with printf tests
 
 	long long int llmax = 9223372036854775807;
 	//ft_printf("%%");
 	//ft_printf("this % i number", 17);
-	ft_printf("%5c", '\0');
+	ft_printf("%.03s", "hi men");
 	ft_printf("\n");
 	/*ft_putchar('\n');
 	printf("%%");
