@@ -1,5 +1,6 @@
 a.out;
 cmake-build-debug/
 .idea;pft/
-pft/
+../pft/
 
+../pft/

@@ -3,7 +3,7 @@
 //
 #include "includes/ft_printf.h"
 
-char	*ft_itoa_printf2(long long value, int base, char *str)
+static char	*ft_itoa_printf2(long long value, int base, char *str)
 {
     int					i;
     int					ostatok;
@@ -43,7 +43,7 @@ char	*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
     return (res);
 }
 
-char	*ft_itoa_printf_u2(unsigned long long value, int base, char *str)
+static char	*ft_itoa_printf_u2(unsigned long long value, int base, char *str)
 {
 	int					i;
 	unsigned long long 	ostatok;
@@ -77,4 +77,15 @@ char	*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *printf_str
 		return (ft_strdup("malloc error")); //TODO make proper exit function
 	res = ft_itoa_printf_u2(value, base, res);
 	return (res);
+}
+
+int 	where_start(t_printf *printf_struct)
+{
+    int i;
+
+    i = 0;
+    while ((printf_struct->res[i] == ' ' || printf_struct->res[i] == '0') &&
+           i < (int)ft_strlen(printf_struct->res) - printf_struct->res_len)
+        i++;
+    return i;
 }

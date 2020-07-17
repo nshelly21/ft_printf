@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.16)
 project(ft_printf C)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 
-include_directories(.)
+include_directories(..)
 include_directories(libft)
 include_directories(libft/includes)
 
@@ -63,4 +63,4 @@ add_executable(ft_printf
         libft/ft_strrev.c
 
         ft_printf/ft_printf.c
-        includes/ft_printf.h ft_printf/ft_itoa.c main.c)
+        includes/ft_printf.h ft_printf/ft_itoa.c main.c ft_printf/init.c ft_printf/init_length_accuracy.c ft_printf/conversions_string_char.c ft_printf/space_handler.c ft_printf/conv_hex.c ft_printf/conv_int_oct.c ft_printf/checks.c ft_printf/round.c ft_printf/conv_handler.c ft_printf/handler_float_hex_oct.c ft_printf/handler_accuracy_size.c ft_printf/fix.c ft_printf/handler_plus_zero_minus.c ft_printf/put_char_first.c ft_printf/conv_pointer_float_percent.c ft_printf/handler_parse_flags.c ft_printf/capitalize.c ft_printf/handler_infcase_negnb.c ft_printf/conv_unsint.c)
