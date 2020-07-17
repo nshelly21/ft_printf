@@ -25,7 +25,7 @@ void	conv_pointer(va_list ap, t_printf *printf_struct)
 void	conv_percent(t_printf *printf_struct)
 {
 	if (!(printf_struct->res = malloc(sizeof(char) * 2)))
-		return ;
+		return (exit_error(printf_struct));
 	printf_struct->res[0] = '%';
 	printf_struct->res[1] = '\0';
 }

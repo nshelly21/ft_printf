@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:23:51 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 19:25:41 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:27:40 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	size_handler(t_printf *printf_struct)
 	int		i;
 	int		len;
 
-	tmp = printf_struct->res;
 	i = 0;
 	len = 0;
 	if (printf_struct->conv == 'c' && printf_struct->zero_arg)
@@ -46,7 +45,7 @@ void	size_handler(t_printf *printf_struct)
 	if (printf_struct->res)
 		len = printf_struct->size - (int)ft_strlen(printf_struct->res);
 	if (!(tmp = (char*)malloc(sizeof(char) * len + 1)))
-		return ;
+		return (exit_error(printf_struct));
 	while (i < len)
 		tmp[i++] = ' ';
 	tmp[i] = '\0';

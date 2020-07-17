@@ -6,7 +6,7 @@
 /*   By: nshelly <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:07:05 by nshelly           #+#    #+#             */
-/*   Updated: 2020/07/17 13:08:54 by nshelly          ###   ########.fr       */
+/*   Updated: 2020/07/17 20:02:53 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	conv_handler(va_list ap, t_printf *printf_struct)
 	if (printf_struct->conv == 's')
 		printf_struct->res = conv_string(ap, printf_struct);
 	if (printf_struct->conv == 'c' || printf_struct->error_conv != -42)
-		printf_struct->res = conv_char(ap, printf_struct);
+		conv_char(ap, printf_struct);
 	if (printf_struct->conv == 'p')
 		conv_pointer(ap, printf_struct);
 	if (printf_struct->conv == 'd' || printf_struct->conv == 'i')

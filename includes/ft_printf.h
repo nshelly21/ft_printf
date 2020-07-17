@@ -35,6 +35,7 @@ typedef struct	s_printf
 	int			ret_value;
 	int 		is_nan;
 	int 		is_inf;
+	int 		error;
 }				t_printf;
 
 typedef struct s_int
@@ -86,7 +87,7 @@ int		init_length(const char *input_str, int i, t_printf *ps);
 *---------------------conversions_string_char.c-------------------------
  */
 char    *conv_string(va_list ap, t_printf *ps);
-char    *conv_char(va_list ap, t_printf *ps);
+void    conv_char(va_list ap, t_printf *ps);
 
 /*
 *---------------------space_handler.c-------------------------
@@ -191,5 +192,7 @@ char 	*put_char_first(char *str, char c);
 *---------------------capitalize.c-------------------------
 */
 char	*capitalize(char *str);
+
+void 	exit_error(t_printf *ps);
 
 #endif //FT_PRINTF_FT_PRINTF_H

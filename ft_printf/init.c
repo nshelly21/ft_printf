@@ -40,6 +40,7 @@ void	init_t_printf2(t_printf *printf_struct)
 	printf_struct->zero_arg = 0;
 	printf_struct->is_nan = 0;
 	printf_struct->is_inf = 0;
+	printf_struct->error = 0;
 }
 
 void	init_t_printf1(t_printf *printf_struct)
