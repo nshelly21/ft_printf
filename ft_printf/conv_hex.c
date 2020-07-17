@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 char		*conv_hex25(va_list ap, t_printf *printf_struct, \
 		t_unsint unsint_struct)
@@ -52,6 +52,7 @@ static char	*conv_hex_continue(va_list ap, t_printf *printf_struct,\
 char		*conv_hex(va_list ap, t_printf *printf_struct)
 {
 	t_unsint	unsint_struct;
+	char	*result;
 
 	init_t_unsint(&unsint_struct);
 	if (printf_struct->is_l)
@@ -60,6 +61,8 @@ char		*conv_hex(va_list ap, t_printf *printf_struct)
 		return (ft_itoa_printf_u1((unsigned long long)unsint_struct.longnb, \
 		16, printf_struct));
 	}
-	conv_hex_continue(ap, printf_struct, &unsint_struct);
+	result = conv_hex_continue(ap, printf_struct, &unsint_struct);
+	if (result)
+		return (result);
 	return (conv_hex25(ap, printf_struct, unsint_struct));
 }

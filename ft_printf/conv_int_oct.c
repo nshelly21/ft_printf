@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 char	*conv_oct25(va_list ap, t_printf *printf_struct, t_unsint unsint_struct)
 {
@@ -24,32 +24,33 @@ char	*conv_oct25(va_list ap, t_printf *printf_struct, t_unsint unsint_struct)
 }
 
 char	*conv_oct_continue(va_list ap, t_printf *printf_struct,\
-		t_unsint *us)
+		t_unsint *unsint_struct)
 {
 	if (printf_struct->is_l)
 	{
-		us->longnb = (unsigned long)va_arg(ap, long);
-		return (ft_itoa_printf_u1((unsigned long long)us->longnb, 8,\
+		unsint_struct->longnb = (unsigned long)va_arg(ap, long);
+		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->longnb, 8,\
 					printf_struct));
 	}
 	if (printf_struct->is_ll)
 	{
-		us->longlongnb = (unsigned long long)va_arg(ap, long long);
-		return (ft_itoa_printf_u1((unsigned long long)us->longlongnb,\
+		unsint_struct->longlongnb = (unsigned long long)va_arg(ap, long long);
+		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->longlongnb,\
 					8, printf_struct));
 	}
 	if (printf_struct->is_h)
 	{
-		us->shortnb = (unsigned short)va_arg(ap, int);
-		return (ft_itoa_printf_u1((unsigned long long)us->shortnb, \
+		unsint_struct->shortnb = (unsigned short)va_arg(ap, int);
+		return (ft_itoa_printf_u1((unsigned long long)unsint_struct->shortnb, \
 					8, printf_struct));
 	}
-	return (NULL);
+	return (0);
 }
 
 char	*conv_oct(va_list ap, t_printf *printf_struct)
 {
 	t_unsint	unsint_struct;
+	char		*result;
 
 	init_t_unsint(&unsint_struct);
 	if (!(printf_struct->is_l || printf_struct->is_ll || printf_struct->is_h \
@@ -59,7 +60,9 @@ char	*conv_oct(va_list ap, t_printf *printf_struct)
 		return (ft_itoa_printf_u1((unsigned long long)unsint_struct.intnb, 8, \
 					printf_struct));
 	}
-	conv_oct_continue(ap, printf_struct, &unsint_struct);
+	result = conv_oct_continue(ap, printf_struct, &unsint_struct);
+	if (result)
+		return(result);
 	return (conv_oct25(ap, printf_struct, unsint_struct));
 }
 
