@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:24:07 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 19:24:09 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 20:28:34 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,27 @@ void	hash_oct_handler(char *str, t_printf *printf_struct)
 		printf_struct->res = put_char_first(printf_struct->res, '0');
 }
 
-void	hash_hex_handler25(char *hex, int j, t_printf *ps)
+int		hash_hex_handler2525(char *hex, int j, t_printf *ps)
 {
-	if (ps->res[0] == '0' && ps->res[1] == '0' && j == 1)
-		ps->res[1] = hex[1];
-	else if (ps->res[0] == '0' && ps->res[1] != '0' && j == 1)
+	if (ps->size > ps->accuracy)
 	{
-		ps->res[0] = hex[1];
-		ps->res = put_char_first(ps->res, hex[0]);
+		if (ps->res[0] == '0' && ps->res[1] == '0' && j == 1)
+			ps->res[1] = hex[1];
+		else if (ps->res[0] == '0' && ps->res[1] != '0' && j == 1)
+		{
+			ps->res[0] = hex[1];
+			ps->res = put_char_first(ps->res, hex[0]);
+		}
+		else if (ps->res[0] != '0' && ps->res[1] != hex[1])
+			ps->res = put_char_first(ps->res, hex[j]);
 	}
-	else if (ps->res[0] != '0' && ps->res[1] != hex[1])
-		ps->res = put_char_first(ps->res, hex[j]);
+	else if (ps->size <= ps->accuracy)
+	{
+		ps->res = put_char_first(ps->res, hex[1]);
+		ps->res = put_char_first(ps->res, hex[0]);
+		return (1);
+	}
+	return (0);
 }
 
 void	hash_hex_handler(t_printf *ps)
@@ -91,15 +101,8 @@ void	hash_hex_handler(t_printf *ps)
 		}
 		else
 		{
-			if (ps->size > ps->accuracy)
-				hash_hex_handler25(hex, j, ps);
-			else if (ps->size <= ps->accuracy)
-			{
-				ps->res = put_char_first(ps->res, hex[1]);
-				ps->res = put_char_first(ps->res, hex[0]);
+			if (hash_hex_handler2525(hex, j, ps))
 				break ;
-			}
 		}
 	}
 }
-
