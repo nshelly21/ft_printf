@@ -6,7 +6,7 @@
 /*   By: nshelly <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:44:03 by nshelly           #+#    #+#             */
-/*   Updated: 2020/07/17 14:36:49 by nshelly          ###   ########.fr       */
+/*   Updated: 2020/07/18 05:32:18 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ void	conv_percent(t_printf *printf_struct)
 	printf_struct->res[1] = '\0';
 }
 
+int 	is_minus_zero(long double zero, t_printf *ps)
+{
+	if (1 / zero < 0)
+	{
+		ps->min_zero = 1;
+		return (1);
+	}
+	else
+		return (0);
+}
+
 void	conv_float(va_list ap, t_printf *ps)
 {
 	long double	nb;
@@ -43,7 +54,7 @@ void	conv_float(va_list ap, t_printf *ps)
 		ps->res = (ps->conv == 'f' ? "inf" : "INF");
 		return ;
 	}
-	if (nb < 0)
+	if (nb == 0 ? is_minus_zero(nb, ps): nb < 0)
 	{
 		ps->is_neg = 1;
 		nb = nb * (-1);
