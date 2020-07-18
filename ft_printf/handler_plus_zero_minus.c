@@ -105,6 +105,6 @@ void	minus_handler(t_printf *ps)
 	while (i > j)
 		res[j++] = ' ';
 	res[j] = '\0';
+	free(ps->res);
 	ps->res = res;
-	free(res);
 }

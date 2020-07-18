@@ -37,11 +37,6 @@ int		round25(t_printf *ps, int i, int nb)
 	}
 	else if (ps->res[i] == '9')
 		ps->res[i] = '0';
-	/*if (ps->res[0] == '0')
-	{
-		ps->res = put_char_first(ps->res, '1');
-		nb = 0;
-	}*/
 	return (nb);
 }
 

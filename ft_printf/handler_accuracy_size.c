@@ -49,6 +49,7 @@ void	size_handler(t_printf *printf_struct)
 	while (i < len)
 		tmp[i++] = ' ';
 	tmp[i] = '\0';
+	free(printf_struct->res);
 	printf_struct->res = ft_strjoin(tmp, printf_struct->res);
 	free(tmp);
 }

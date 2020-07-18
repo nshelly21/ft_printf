@@ -51,7 +51,10 @@ char	*conv_string(va_list ap, t_printf *ps)
 	if (!str && !ps->is_point)
 		return (ft_strdup("(null)"));
 	if (!ps->accuracy && ps->is_point)
+	{
+		free(str);
 		return (ft_strnew(0));
+	}
 	return (str_acc(str, ps, i));
 }
 
@@ -76,5 +79,6 @@ void	conv_char(va_list ap, t_printf *ps)
 		return (exit_error(ps));
 	res[0] = identified_char;
 	res[1] = '\0';
+	free(ps->res);
 	ps->res = res;
 }

@@ -21,6 +21,7 @@ void	hash_float_handler(char *str, t_printf *printf_struct)
 		i++;
 	if (str[i] != '.')
 		str[i] = '.';
+	free(printf_struct->res);
 	printf_struct->res = str;
 }
 
@@ -41,6 +42,7 @@ void	float_handler(long double nb, t_printf *ps)
 		dot = ft_strjoin(dot, tmp);
 	}
 	dot = put_char_first(dot, '.');
+	free(ps->res);
 	ps->res = ft_strjoin(ps->res, dot);
 	round1(ps);
 }
@@ -55,7 +57,10 @@ void	hash_oct_handler(char *str, t_printf *printf_struct)
 	if (--i >= 0)
 		str[i] = '0';
 	else
+	{
+		free(printf_struct->res);
 		printf_struct->res = put_char_first(printf_struct->res, '0');
+	}
 }
 
 int		hash_hex_handler2525(char *hex, int j, t_printf *ps)
