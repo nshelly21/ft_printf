@@ -36,7 +36,6 @@ typedef struct	s_printf
 	int 		is_nan;
 	int 		is_inf;
 	int 		error;
-	int 		min_zero;
 }				t_printf;
 
 typedef struct s_int
@@ -195,7 +194,5 @@ char 	*put_char_first(char *str, char c);
 char	*capitalize(char *str);
 
 void 	exit_error(t_printf *ps);
-
-char	*pcf_skip_sp(char *str, char c);
 
 #endif //FT_PRINTF_FT_PRINTF_H

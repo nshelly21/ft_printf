@@ -68,16 +68,11 @@ int main(void)
 	long long int llmax = 9223372036854775807;
 	//ft_printf("%%");
 	//ft_printf("this % i number", 17);
-	/*ft_printf("|% -8.3d|", 8375);
-	ft_printf("\n");
-	ft_printf("|% 08.3d|", 8375);
-	ft_printf("\n");*/
-	ft_printf("%05.3f", -0.0);
-	/*ft_printf("%.03s", "hi men");
+	ft_printf("%.03s", "hi men");
 	ft_printf("\n");
 	printf("%.03s", "hi men");
 	ft_printf("\n");
-	printf("%3.1s", NULL);*/
+	printf("%3.1s", NULL);
 	/*ft_putchar('\n');
 	printf("%%");
 	ft_putchar('\n');

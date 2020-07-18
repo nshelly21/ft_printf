@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:25:32 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/18 04:11:34 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:25:33 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	space_handler(t_printf *ps)
 {
 	if (ps->accuracy && ps->size)
 	{
-		if (ps->size > ps->accuracy)
+		if (ps->accuracy > ps->size)
 		{
 			if (ps->res_len < ps->accuracy)
 				ps->res[ps->size - ps->accuracy - 1] = ' ';
@@ -45,7 +45,7 @@ void	space_handler(t_printf *ps)
 					ps->size > ps->res_len)
 				ps->res[ps->size - ps->res_len -
 						ps->is_point] = ' ';
-			else if (ps->res_len >= ps->accuracy && (int)ft_strlen(ps->res) != ps->size)
+			else if (ps->res_len >= ps->accuracy)
 				ps->res = put_char_first(ps->res, ' ');
 		}
 		else if (ps->size <= ps->accuracy)

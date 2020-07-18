@@ -30,8 +30,10 @@ void	conv_handler(va_list ap, t_printf *printf_struct)
 		printf_struct->res = conv_hex(ap, printf_struct);
 	if (printf_struct->conv == 'X')
 		printf_struct->res = capitalize(conv_hex(ap, printf_struct));
-	if (printf_struct->conv == 'f' || printf_struct->conv == 'F')
+	if (printf_struct->conv == 'f')
 		conv_float(ap, printf_struct);
+	if (printf_struct->conv == 'F')
+		printf_struct->res = capitalize(conv_hex(ap, printf_struct));
 	if (printf_struct->conv == '%')
 		conv_percent(printf_struct);
 	if (printf_struct->res)

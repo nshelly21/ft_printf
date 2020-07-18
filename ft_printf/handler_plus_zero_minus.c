@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:24:41 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/18 03:47:02 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/17 20:19:46 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	plus_handler(t_printf *ps)
 						ps->size > ps->res_len)
 				ps->res[ps->size - ps->res_len - ps->is_point] = '+';
 			else if (ps->res_len >= ps->accuracy)
-				ps->res = pcf_skip_sp(ps->res, '+');
+				ps->res = put_char_first(ps->res, '+');
 		}
 		else if (ps->size <= ps->accuracy)
 			ps->res = put_char_first(ps->res, '+');

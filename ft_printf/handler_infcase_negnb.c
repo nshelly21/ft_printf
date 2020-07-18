@@ -23,7 +23,7 @@ void	negnb_handler(t_printf *ps)
 		ps->res[i] = '-';
 	else
 	{
-		if (ps->res[0] == '0' && ps->size > ps->accuracy && !ps->min_zero)
+		if (ps->res[0] == '0' && ps->size > ps->accuracy)
 			ps->res[0] = '-';
 		else
 			ps->res = put_char_first(ps->res, '-');
