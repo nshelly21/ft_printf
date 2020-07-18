@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:24:29 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 23:31:30 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/18 05:03:48 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	flags_handler(const char *str, t_printf *ps)
 	{
 		if (ps->is_zero)
 			zero_handler(ps);
-		if (ps->is_plus && !ps->is_nan)
+		if (ps->is_plus && !ps->is_nan && !ps->is_neg)
 			plus_handler(ps);
 		if (ps->is_space && !ps->is_nan)
 			space_handler(ps);
@@ -31,7 +31,7 @@ void	flags_handler(const char *str, t_printf *ps)
 		if (ps->is_neg)
 			negnb_handler(ps);
 		if ((ps->conv == 'f' || ps->conv == 'F') && ps->is_hash)
-			hash_float_handler((char*)str, ps);
+			hash_float_handler(ps->res, ps);
 	}
 	if (ps->is_inf && (ps->is_plus || ps->is_space))
 		inf_case_handler(ps);
@@ -49,7 +49,9 @@ int		parse_flags(const char *input_str, int i, t_printf *printf_struct)
 	{
 		printf_struct->is_point = 1;
 		while (!is_conv(input_str, i) || !input_str[i])
-			if (input_str[++i] >= '0' && input_str[i] <= '9')
+			if (is_length(input_str, i))
+				i = init_length(input_str, i, printf_struct);
+			else if (input_str[++i] >= '0' && input_str[i] <= '9')
 				i = i + init_accuracy(input_str, i, printf_struct);
 			else if (!is_conv(input_str, i))
 				printf_struct->accuracy = 0;
