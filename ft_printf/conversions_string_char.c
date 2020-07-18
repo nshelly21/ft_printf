@@ -15,6 +15,7 @@
 char	*str_acc(char *str, t_printf *ps, int i)
 {
 	char	*res;
+	char	*tmp;
 
 	if (!ps->accuracy)
 	{
@@ -23,7 +24,9 @@ char	*str_acc(char *str, t_printf *ps, int i)
 			ps->error = 1;
 			return (0);
 		}
+		tmp = res;
 		res = ft_strcpy(res, str);
+		free(tmp);
 	}
 	else
 	{

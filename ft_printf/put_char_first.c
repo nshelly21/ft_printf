@@ -25,5 +25,6 @@ char	*put_char_first(char *str, char c)
 	while (str[++i])
 		tmp[i + 1] = str[i];
 	tmp[i + 1] = '\0';
+	free(str);
 	return (tmp);
 }

@@ -32,6 +32,7 @@ static char	*ft_itoa_printf2(long long value, int base, char *str)
 char		*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
 {
 	char				*res;
+	char				*tmp;
 
 	if (value == 0)
 	{
@@ -51,7 +52,9 @@ char		*ft_itoa_printf1(long long value, int base, t_printf *printf_struct)
 		exit_error(printf_struct);
 		return (ft_strdup("malloc error"));
 	}
+	tmp = res;
 	res = ft_itoa_printf2(value, base, res);
+	free(tmp);
 	return (res);
 }
 
@@ -75,6 +78,7 @@ static char	*ft_itoa_printf_u2(unsigned long long value, int base, char *str)
 char		*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *ps)
 {
 	char				*res;
+	char				*tmp;
 
 	if (value == 0)
 	{
@@ -90,7 +94,9 @@ char		*ft_itoa_printf_u1(unsigned long long value, int base, t_printf *ps)
 		exit_error(ps);
 		return (ft_strdup("malloc error"));
 	}
+	tmp = res;
 	res = ft_itoa_printf_u2(value, base, res);
+	free(tmp);
 	return (res);
 }
 
