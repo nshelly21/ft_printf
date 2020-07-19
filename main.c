@@ -2,7 +2,7 @@
 // Created by Denisse Gruyere on 7/13/20.
 //
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 int main(void)
 {
@@ -20,20 +20,18 @@ int main(void)
 
 	//simple TESTS FROM https://alvinalexander.com/programming/printf-format-cheat-sheet/
 	//integer formatting
-
+	//ft_printf("%-5s", "goes over");
+	ft_printf("%16s", "nark nark");
 	/*ft_printf("hello%#o\n", 10);
+	printf(("hello%#o\n", 10));
 	ft_printf("hello %#lx\n", "hello");
-	printf("hello %p\n", "hello");
-	printf("hello %#lx\n", "hello");
-	printf("hello %#o\n", 10);
 	ft_printf("hola%c\n", 'd');
-	printf("hola%c\n", 'd');
 	ft_printf("%-5d\n", 10);							//'10   '
 	ft_printf("%05d\n", 10);							//'00010'
 	ft_printf("%+5d\n", 10);							//'  +10'
-	ft_printf("%-+5d\n", 10);							//'+10  '
+	ft_printf("%-+5d\n", 10);*/							//'+10  '
 	//integer zero-fill option
-	ft_printf("%03d\n", 0);								//000
+	/*ft_printf("%03d\n", 0);								//000
 	ft_printf("%03d\n", 1);								//001
 	ft_printf("%03d\n", 123456789);						//123456789
 	ft_printf("%03d\n", -10);								//-10
@@ -71,35 +69,28 @@ int main(void)
 	/*ft_printf("|% -8.3d|", 8375);
 	ft_printf("\n");
 	ft_printf("|% 08.3d|", 8375);
-	ft_printf("\n");*/
-	ft_printf("%05.3f", -0.0);
-	/*ft_printf("%.03s", "hi men");
 	ft_printf("\n");
-	printf("%.03s", "hi men");
+	//ft_printf("%*s", 32, "abc");
+	ft_printf("%.03s", "hi men");
 	ft_printf("\n");
-	printf("%3.1s", NULL);*/
-	/*ft_putchar('\n');
-	printf("%%");
+	ft_printf("\n");
+	ft_putchar('\n');
 	ft_putchar('\n');
 	ft_putchar('\n');
 	ft_printf("%5%");
 	ft_putchar('\n');
-	printf("%5%");
 	ft_putchar('\n');
 	ft_putchar('\n');
 	ft_printf("%-5%");
 	ft_putchar('\n');
-	printf("%-5%");
 	ft_putchar('\n');
 	ft_putchar('\n');
 	ft_printf("%05");
 	ft_putchar('\n');
-	printf("%05%");
 	ft_putchar('\n');
 	ft_putchar('\n');
 	ft_printf("%-05s");
-	ft_putchar('\n');
-	printf("%-05s%");
+	ft_putchar('\n');*/
 	/*
 	Test  12 (nocrash_nullspec_5w) : FAILED.
 			(nocrash test: automatically passes provided no unexpected failure)

@@ -6,58 +6,63 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:23:51 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 19:27:40 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/19 02:58:05 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	accuracy_handler(t_printf *printf_struct)
+char	*accuracy_handler(char *res, t_printf *printf_struct)
 {
+	char	*res1;
 	char	*tmp;
 	int		i;
 	int		len;
 
-	tmp = NULL;
+	tmp = res;
 	i = 0;
 	len = 0;
-	if (printf_struct->res)
-		len = printf_struct->accuracy - (int)ft_strlen(printf_struct->res);
-	if (!(tmp = (char*)malloc(sizeof(char) * len + 1)))
-		return ;
+	if (res)
+		len = printf_struct->accuracy - (int)ft_strlen(res);
+	if (!(res1 = (char*)malloc(sizeof(char) * len + 1)))
+		return (exit_error("malloc unsuccessful", printf_struct));
 	while (i < len && printf_struct->conv != 's')
-		tmp[i++] = '0';
-	tmp[i] = '\0';
-	printf_struct->res = ft_strjoin(tmp, printf_struct->res);
+		res1[i++] = '0';
+	res1[i] = '\0';
+	res = ft_strjoin(res1, res);
 	free(tmp);
+	free(res1);
+	return (res);
 }
 
-void	size_handler(t_printf *printf_struct)
+char	*size_handler(char *res, t_printf *printf_struct)
 {
-	char	*tmp;
+	char	*res1;
 	int		i;
 	int		len;
 
-	i = 0;
+	i = -1;
 	len = 0;
 	if (printf_struct->conv == 'c' && printf_struct->zero_arg)
 		printf_struct->size -= 1;
-	if (printf_struct->res)
-		len = printf_struct->size - (int)ft_strlen(printf_struct->res);
-	if (!(tmp = (char*)malloc(sizeof(char) * len + 1)))
-		return (exit_error(printf_struct));
-	while (i < len)
-		tmp[i++] = ' ';
-	tmp[i] = '\0';
-	printf_struct->res = ft_strjoin(tmp, printf_struct->res);
-	free(tmp);
+	if (res)
+		len = printf_struct->size - (int)ft_strlen(res);
+	if (!(res1 = (char*)malloc(sizeof(char) * len + 1)))
+		return (exit_error("malloc unsuccessful", printf_struct));
+	while (++i < len)
+		res1[i] = ' ';
+	res1[i] = '\0';
+	res = ft_strjoin(res1, res);
+	free(res1);
+	return (res);
 }
 
-void	accuracy_and_size_handler(t_printf *ps)
+char	*accuracy_and_size_handler(char *res, t_printf *ps)
 {
-	if (ps->accuracy && (int)ft_strlen(ps->res) < ps->accuracy &&
+	if (ps->accuracy && (int)ft_strlen(res) < ps->accuracy &&
 	(ps->conv != 'f' && ps->conv != 'F'))
-		accuracy_handler(ps);
-	if (ps->size && (int)ft_strlen(ps->res) < ps->size)
-		size_handler(ps);
+		res = accuracy_handler(res, ps);
+	if (ps->size && (int)ft_strlen(res) < ps->size)
+		res = size_handler(res, ps);
+	return (res);
 }

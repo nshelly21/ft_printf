@@ -6,28 +6,33 @@
 /*   By: nshelly <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 13:44:03 by nshelly           #+#    #+#             */
-/*   Updated: 2020/07/18 05:32:18 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/19 00:23:14 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	conv_pointer(va_list ap, t_printf *printf_struct)
+char	*conv_pointer(va_list ap, t_printf *printf_struct)
 {
 	void		*str;
+	char 		*res;
 	long long	k;
 
 	str = va_arg(ap, void*);
 	k = (long long)str;
-	printf_struct->res = ft_itoa_printf1(k, 16, printf_struct);
+	res = ft_itoa_printf1(k, 16, printf_struct);
+	return (res);
 }
 
-void	conv_percent(t_printf *printf_struct)
+char	*conv_percent(t_printf *printf_struct)
 {
-	if (!(printf_struct->res = malloc(sizeof(char) * 2)))
-		return (exit_error(printf_struct));
-	printf_struct->res[0] = '%';
-	printf_struct->res[1] = '\0';
+	char		*res;
+
+	if (!(res = malloc(sizeof(char) * 2)))
+		return (exit_error("malloc unsuccessful", printf_struct));
+	res[0] = '%';
+	res[1] = '\0';
+	return (res);
 }
 
 int 	is_minus_zero(long double zero, t_printf *ps)
@@ -41,23 +46,25 @@ int 	is_minus_zero(long double zero, t_printf *ps)
 		return (0);
 }
 
-void	conv_float(va_list ap, t_printf *ps)
+char	*conv_float(va_list ap, t_printf *ps)
 {
 	long double	nb;
+	char 		*res;
 
+	res = NULL;
 	nb = (long double)va_arg(ap, double);
 	if (!(ps->accuracy) && !(ps->is_point))
 		ps->accuracy = 6;
 	if ((1.0 / 0.0) == nb)
 	{
 		ps->is_inf = 1;
-		ps->res = (ps->conv == 'f' ? "inf" : "INF");
-		return ;
+		return (ft_strdup(ps->conv == 'f' ? "inf" : "INF"));
 	}
 	if (nb == 0 ? is_minus_zero(nb, ps): nb < 0)
 	{
 		ps->is_neg = 1;
 		nb = nb * (-1);
 	}
-	float_handler(nb, ps);
+	res = float_handler(nb, ps, res);
+	return (res);
 }

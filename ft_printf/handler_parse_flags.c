@@ -6,37 +6,38 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:24:29 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/18 05:03:48 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/19 00:52:51 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	flags_handler(const char *str, t_printf *ps)
+char	*flags_handler(char *str, t_printf *ps)
 {
 	if (!ps->is_nan && !ps->is_inf)
 	{
 		if (ps->is_zero)
-			zero_handler(ps);
+			str = zero_handler(str);
 		if (ps->is_plus && !ps->is_nan && !ps->is_neg)
-			plus_handler(ps);
+			str = plus_handler(str, ps);
 		if (ps->is_space && !ps->is_nan)
-			space_handler(ps);
+			str = space_handler(str, ps);
 		if (ps->is_hash == 1 && (ps->conv == 'x' ||
 			ps->conv == 'X' || ps->conv == 'p') &&
 			!((ps->conv == 'x' || ps->conv == 'X') && ps->zero_arg == 1))
-			hash_hex_handler(ps);
+			str = hash_hex_handler(str, ps);
 		if (ps->conv == 'o' && !ps->accuracy && ps->is_hash)
-			hash_oct_handler((char*)str, ps);
+			str = hash_oct_handler(str);
 		if (ps->is_neg)
-			negnb_handler(ps);
+			str = negnb_handler(str, ps);
 		if ((ps->conv == 'f' || ps->conv == 'F') && ps->is_hash)
-			hash_float_handler(ps->res, ps);
+			hash_float_handler(str);
 	}
 	if (ps->is_inf && (ps->is_plus || ps->is_space))
-		inf_case_handler(ps);
+		str = inf_case_handler(str, ps);
 	if (ps->is_minus)
-		minus_handler(ps);
+		str = minus_handler(str, ps);
+	return (str);
 }
 
 int		parse_flags(const char *input_str, int i, t_printf *printf_struct)

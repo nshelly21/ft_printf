@@ -21,7 +21,7 @@ char		*conv_unsint25(va_list ap, t_printf *printf_struct, \
 		return (ft_itoa_printf_u1((unsigned long long)int_struct.shortnb, 10,\
 					printf_struct));
 	}
-	return (NULL);
+	return (0);
 }
 
 static char	*conv_unsint_continue(va_list ap, t_printf *printf_struct, \

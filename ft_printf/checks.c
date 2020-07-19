@@ -29,9 +29,17 @@ int	is_conv(const char *str, int i)
 	return (0);
 }
 
-int	is_length(const char *str, int i)
+int		is_length(const char *str, int i)
 {
 	if (str[i] == 'h' || str[i] == 'l')
 		return (1);
 	return (0);
+}
+
+void	free_str(char *str, char *str1)
+{
+	if (str)
+		free(str);
+	if (str1)
+		free(str1);
 }

@@ -12,35 +12,37 @@
 
 #include "../includes/ft_printf.h"
 
-void	negnb_handler(t_printf *ps)
+char	*negnb_handler(char *str, t_printf *ps)
 {
 	int	i;
 
 	i = 0;
-	while (ps->res[i] == ' ')
+	while (str[i] == ' ')
 		i++;
 	if (--i >= 0)
-		ps->res[i] = '-';
+		str[i] = '-';
 	else
 	{
-		if (ps->res[0] == '0' && ps->size > ps->accuracy && !ps->min_zero)
-			ps->res[0] = '-';
+		if (str[0] == '0' && ps->size > ps->accuracy && !ps->min_zero)
+			str[0] = '-';
 		else
-			ps->res = put_char_first(ps->res, '-');
+			str = put_char_first(str, '-');
 	}
+	return (str);
 }
 
-void	inf_case_handler(t_printf *ps)
+char	*inf_case_handler(char *str, t_printf *ps)
 {
 	int	i;
 
 	i = 0;
-	while (ps->res[i] == ' ')
+	while (str[i] == ' ')
 		i++;
 	if (--i >= 0)
-		ps->res[i] = ps->is_plus ? '+' : ' ';
+		str[i] = ps->is_plus ? '+' : ' ';
 	else
-		ps->res = put_char_first(ps->res, ps->is_plus ? '+' : ' ');
+		str = put_char_first(str, ps->is_plus ? '+' : ' ');
+	return (str);
 }
 
 int		count_dig(int nb)

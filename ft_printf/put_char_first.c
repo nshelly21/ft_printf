@@ -36,6 +36,7 @@ char	*pcf_skip_sp(char *str, char c)
 char	*put_char_first(char *str, char c)
 {
 	char	*tmp;
+	char	*tmp1;
 	int		i;
 
 	tmp = NULL;
@@ -46,5 +47,7 @@ char	*put_char_first(char *str, char c)
 	while (str[++i])
 		tmp[i + 1] = str[i];
 	tmp[i + 1] = '\0';
+	tmp1 = tmp;
+	free(tmp1);
 	return (tmp);
 }

@@ -6,27 +6,33 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:23:43 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 22:09:19 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/19 03:13:43 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	exit_error(t_printf *ps)
+char	*exit_error(char *erinfo, t_printf *ps)
 {
 	ps->error = 1;
+	return(ft_strdup(erinfo));
 }
 
 int		parse(int i, const char *input_str, va_list ap, t_printf ps)
 {
+	char	*res;
+
+	res = NULL;
 	i = parse_flags(input_str, ++i, &ps);
-	conv_handler(ap, &ps);
+	res = conv_handler(ap, &ps);
 	fix_flag_errors1(&ps);
-	accuracy_and_size_handler(&ps);
-	flags_handler(ps.res, &ps);
+	if (res)
+		ps.res_len = ft_strlen(res);
+	res = accuracy_and_size_handler(res, &ps);
+	res = flags_handler(res, &ps);
 	if (ps.conv == 'c' && ps.zero_arg && ps.is_minus)
 		ft_putchar('\0');
-	ps.ret_value += ft_putstr(ps.res);
+	ps.ret_value += ft_putstr(res);
 	if (ps.conv == 'c' && ps.zero_arg && !ps.is_minus)
 		ft_putchar('\0');
 	return (input_str[i] == '\0' ? i : i + 1);

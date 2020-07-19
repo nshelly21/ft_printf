@@ -6,7 +6,7 @@
 /*   By: dgruyere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 19:23:06 by dgruyere          #+#    #+#             */
-/*   Updated: 2020/07/17 20:10:13 by dgruyere         ###   ########.fr       */
+/*   Updated: 2020/07/19 02:51:40 by dgruyere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 char	*str_acc(char *str, t_printf *ps, int i)
 {
 	char	*res;
+	char	*tmp;
 
+	res = NULL;
 	if (!ps->accuracy)
 	{
 		if (!(res = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1))))
-		{
-			ps->error = 1;
-			return (0);
-		}
+			return (exit_error("malloc unsuccessful", ps));
 		res = ft_strcpy(res, str);
 	}
-	else
+	else if (str)
 	{
 		if (!(res = (char*)malloc(sizeof(char) * (ps->accuracy + 1))))
 		{
@@ -36,6 +35,8 @@ char	*str_acc(char *str, t_printf *ps, int i)
 			res[i] = str[i];
 		res[i] = '\0';
 	}
+	tmp = res;
+	free(tmp);
 	return (res);
 }
 
@@ -55,7 +56,7 @@ char	*conv_string(va_list ap, t_printf *ps)
 	return (str_acc(str, ps, i));
 }
 
-void	conv_char(va_list ap, t_printf *ps)
+char	*conv_char(va_list ap, t_printf *ps)
 {
 	char identified_char;
 	char *res;
@@ -69,12 +70,11 @@ void	conv_char(va_list ap, t_printf *ps)
 		ps->zero_arg = 1;
 		if (ps->error_conv == -42)
 			ps->ret_value += 1;
-		ps->res = ft_strnew(0);
-		return ;
+		return(ft_strnew(0));
 	}
 	if (!(res = (char*)malloc(sizeof(char) * 2)))
-		return (exit_error(ps));
+		return (exit_error("malloc unsuccessful", ps));
 	res[0] = identified_char;
 	res[1] = '\0';
-	ps->res = res;
+	return(res);
 }
